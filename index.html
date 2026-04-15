@@ -294,36 +294,42 @@ main {
       <div class="progress-fill" id="progress-fill"></div>
     </div>
   </div>
-</div>
 
-<div class="controls">
-  <select id="law-select" aria-label="依法規篩選">
+  <!-- Controls (filter + search) -->
+  <div class="controls">
+    <select id="law-select" aria-label="依法規篩選">
 <option value="全部">全部（402 題）</option>
+<option value="未完成" id="opt-incomplete">📝 未完成</option>
 <option value="錯題本">⭐ 我的錯題本</option>
 <option value="金庫密碼">🔢 金庫密碼（63 題）</option>
-<option disabled>──────────────────</option>
+<optgroup label="── 母法 ──">
 <option value="職業安全衛生法">職業安全衛生法（143 題）</option>
-<option disabled>──────────────────</option>
+</optgroup>
+<optgroup label="── 核心子法 ──">
 <option value="職業安全衛生法施行細則">職業安全衛生法施行細則（3 題）</option>
 <option value="營造安全衛生設施標準">營造安全衛生設施標準（141 題）</option>
 <option value="職業安全衛生設施規則">職業安全衛生設施規則（40 題）</option>
 <option value="職業安全衛生管理辦法">職業安全衛生管理辦法（14 題）</option>
 <option value="職業安全衛生教育訓練規則">職業安全衛生教育訓練規則（13 題）</option>
-<option disabled>──────────────────</option>
+</optgroup>
+<optgroup label="── 特定作業子法 ──">
 <option value="起重升降機具安全規則">起重升降機具安全規則（20 題）</option>
 <option value="勞工健康保護規則">勞工健康保護規則（6 題）</option>
 <option value="危害性化學品標示及通識規則">危害性化學品標示及通識規則（0 題）</option>
 <option value="缺氧症預防規則">缺氧症預防規則（7 題）</option>
 <option value="高壓氣體勞工安全規則">高壓氣體勞工安全規則（2 題）</option>
 <option value="鍋爐及壓力容器安全規則">鍋爐及壓力容器安全規則（0 題）</option>
-<option disabled>──────────────────</option>
+</optgroup>
+<optgroup label="── 關聯法規 ──">
 <option value="勞動檢查法">勞動檢查法（12 題）</option>
 <option value="勞動基準法">勞動基準法（1 題）</option>
-  </select>
-  <input id="search-input" type="search" placeholder="🔍 關鍵字搜尋…" autocomplete="off" aria-label="搜尋題目">
-  <span id="stats"></span>
-  <button id="clear-wrong-btn" title="清除錯題記錄">清除錯題本</button>
-  <button id="reset-progress-btn" title="重置所有作答記錄">重置進度</button>
+</optgroup>
+    </select>
+    <input id="search-input" type="search" placeholder="🔍 關鍵字搜尋…" autocomplete="off" aria-label="搜尋題目">
+    <span id="stats"></span>
+    <button id="clear-wrong-btn" title="清除錯題記錄">清除錯題本</button>
+    <button id="reset-progress-btn" title="重置所有作答記錄">重置進度</button>
+  </div>
 </div>
 
 <main id="main-grid">
@@ -380,6 +386,7 @@ function updateProgress() {
   fill.className = 'progress-fill' + (done ? ' done' : '');
 
   document.getElementById('progress-track').setAttribute('aria-valuenow', count);
+  updateIncompleteLabel();
 }
 
 // ── Wrong-answer helpers ──────────────────────────────────────────────────────
@@ -450,6 +457,13 @@ function renderCard(q) {
 </div>`;
 }
 
+// ── Update "未完成" option label ──────────────────────────────────────────────
+function updateIncompleteLabel() {
+  const cnt = QUESTIONS.filter(q => !answered.has(q.id)).length;
+  const el = document.getElementById('opt-incomplete');
+  if (el) el.textContent = `📝 未完成（${cnt} 題）`;
+}
+
 // ── Filter logic ──────────────────────────────────────────────────────────────
 function filteredQuestions() {
   let list = QUESTIONS;
@@ -457,6 +471,8 @@ function filteredQuestions() {
     list = list.filter(q => wrongSet.has(q.id));
   } else if (currentFilter === '金庫密碼') {
     list = list.filter(q => q.isNumeric);
+  } else if (currentFilter === '未完成') {
+    list = list.filter(q => !answered.has(q.id));
   } else if (currentFilter !== '全部') {
     list = list.filter(q => q.law === currentFilter);
   }
@@ -473,6 +489,7 @@ function filteredQuestions() {
 function filteredBase() {
   if (currentFilter === '錯題本') return wrongSet.size;
   if (currentFilter === '金庫密碼') return QUESTIONS.filter(q => q.isNumeric).length;
+  if (currentFilter === '未完成') return QUESTIONS.filter(q => !answered.has(q.id)).length;
   if (currentFilter === '全部') return TOTAL;
   return QUESTIONS.filter(q => q.law === currentFilter).length;
 }

@@ -8,28 +8,27 @@ with open("questions.json", encoding="utf-8") as f:
 
 js_data = json.dumps(questions, ensure_ascii=False, separators=(",", ":"))
 
-LAWS_ORDER = [
-    "全部",
-    "⭐ 我的錯題本",
-    "🔢 金庫密碼",
-    None,
-    "職業安全衛生法",
-    None,
-    "職業安全衛生法施行細則",
-    "營造安全衛生設施標準",
-    "職業安全衛生設施規則",
-    "職業安全衛生管理辦法",
-    "職業安全衛生教育訓練規則",
-    None,
-    "起重升降機具安全規則",
-    "勞工健康保護規則",
-    "危害性化學品標示及通識規則",
-    "缺氧症預防規則",
-    "高壓氣體勞工安全規則",
-    "鍋爐及壓力容器安全規則",
-    None,
-    "勞動檢查法",
-    "勞動基準法",
+# Groups: (group_label_or_None, [law_names])
+# None group_label = top-level options (no optgroup wrapper)
+LAWS_GROUPS = [
+    (None, ["全部", "未完成", "⭐ 我的錯題本", "🔢 金庫密碼"]),
+    ("母法", ["職業安全衛生法"]),
+    ("核心子法", [
+        "職業安全衛生法施行細則",
+        "營造安全衛生設施標準",
+        "職業安全衛生設施規則",
+        "職業安全衛生管理辦法",
+        "職業安全衛生教育訓練規則",
+    ]),
+    ("特定作業子法", [
+        "起重升降機具安全規則",
+        "勞工健康保護規則",
+        "危害性化學品標示及通識規則",
+        "缺氧症預防規則",
+        "高壓氣體勞工安全規則",
+        "鍋爐及壓力容器安全規則",
+    ]),
+    ("關聯法規", ["勞動檢查法", "勞動基準法"]),
 ]
 
 from collections import Counter
@@ -37,19 +36,28 @@ law_counts = Counter(q["law"] for q in questions)
 numeric_count = sum(1 for q in questions if q["isNumeric"])
 total = len(questions)
 
+def make_option(item):
+    if item == "全部":
+        return f'<option value="全部">全部（{total} 題）</option>\n'
+    if item == "未完成":
+        return '<option value="未完成" id="opt-incomplete">📝 未完成</option>\n'
+    if item == "⭐ 我的錯題本":
+        return f'<option value="錯題本">⭐ 我的錯題本</option>\n'
+    if item == "🔢 金庫密碼":
+        return f'<option value="金庫密碼">🔢 金庫密碼（{numeric_count} 題）</option>\n'
+    cnt = law_counts.get(item, 0)
+    return f'<option value="{item}">{item}（{cnt} 題）</option>\n'
+
 options_html = ""
-for item in LAWS_ORDER:
-    if item is None:
-        options_html += '<option disabled>──────────────────</option>\n'
-    elif item == "全部":
-        options_html += f'<option value="全部">全部（{total} 題）</option>\n'
-    elif item == "⭐ 我的錯題本":
-        options_html += f'<option value="錯題本">⭐ 我的錯題本</option>\n'
-    elif item == "🔢 金庫密碼":
-        options_html += f'<option value="金庫密碼">🔢 金庫密碼（{numeric_count} 題）</option>\n'
+for group_label, items in LAWS_GROUPS:
+    if group_label is None:
+        for item in items:
+            options_html += make_option(item)
     else:
-        cnt = law_counts.get(item, 0)
-        options_html += f'<option value="{item}">{item}（{cnt} 題）</option>\n'
+        options_html += f'<optgroup label="── {group_label} ──">\n'
+        for item in items:
+            options_html += make_option(item)
+        options_html += '</optgroup>\n'
 
 HTML = f"""<!DOCTYPE html>
 <html lang="zh-TW">
@@ -347,15 +355,16 @@ main {{
       <div class="progress-fill" id="progress-fill"></div>
     </div>
   </div>
-</div>
 
-<div class="controls">
-  <select id="law-select" aria-label="依法規篩選">
-{options_html}  </select>
-  <input id="search-input" type="search" placeholder="🔍 關鍵字搜尋…" autocomplete="off" aria-label="搜尋題目">
-  <span id="stats"></span>
-  <button id="clear-wrong-btn" title="清除錯題記錄">清除錯題本</button>
-  <button id="reset-progress-btn" title="重置所有作答記錄">重置進度</button>
+  <!-- Controls (filter + search) -->
+  <div class="controls">
+    <select id="law-select" aria-label="依法規篩選">
+{options_html}    </select>
+    <input id="search-input" type="search" placeholder="🔍 關鍵字搜尋…" autocomplete="off" aria-label="搜尋題目">
+    <span id="stats"></span>
+    <button id="clear-wrong-btn" title="清除錯題記錄">清除錯題本</button>
+    <button id="reset-progress-btn" title="重置所有作答記錄">重置進度</button>
+  </div>
 </div>
 
 <main id="main-grid">
@@ -412,6 +421,7 @@ function updateProgress() {{
   fill.className = 'progress-fill' + (done ? ' done' : '');
 
   document.getElementById('progress-track').setAttribute('aria-valuenow', count);
+  updateIncompleteLabel();
 }}
 
 // ── Wrong-answer helpers ──────────────────────────────────────────────────────
@@ -482,6 +492,13 @@ function renderCard(q) {{
 </div>`;
 }}
 
+// ── Update "未完成" option label ──────────────────────────────────────────────
+function updateIncompleteLabel() {{
+  const cnt = QUESTIONS.filter(q => !answered.has(q.id)).length;
+  const el = document.getElementById('opt-incomplete');
+  if (el) el.textContent = `📝 未完成（${{cnt}} 題）`;
+}}
+
 // ── Filter logic ──────────────────────────────────────────────────────────────
 function filteredQuestions() {{
   let list = QUESTIONS;
@@ -489,6 +506,8 @@ function filteredQuestions() {{
     list = list.filter(q => wrongSet.has(q.id));
   }} else if (currentFilter === '金庫密碼') {{
     list = list.filter(q => q.isNumeric);
+  }} else if (currentFilter === '未完成') {{
+    list = list.filter(q => !answered.has(q.id));
   }} else if (currentFilter !== '全部') {{
     list = list.filter(q => q.law === currentFilter);
   }}
@@ -505,6 +524,7 @@ function filteredQuestions() {{
 function filteredBase() {{
   if (currentFilter === '錯題本') return wrongSet.size;
   if (currentFilter === '金庫密碼') return QUESTIONS.filter(q => q.isNumeric).length;
+  if (currentFilter === '未完成') return QUESTIONS.filter(q => !answered.has(q.id)).length;
   if (currentFilter === '全部') return TOTAL;
   return QUESTIONS.filter(q => q.law === currentFilter).length;
 }}
