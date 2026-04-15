@@ -116,9 +116,13 @@ body {{
   --shadow: 0 2px 8px rgba(0,0,0,.35);
 }}
 
+/* ── Sticky top wrapper (header + progress bar) ───── */
+.sticky-top {{
+  position: sticky; top: 0; z-index: 100;
+}}
+
 /* ── Header ───────────────────────────────────────── */
 header {{
-  position: sticky; top: 0; z-index: 100;
   background: var(--primary);
   color: #fff;
   padding: 12px 16px;
@@ -139,9 +143,6 @@ header h1 {{
 
 /* ── Progress bar ─────────────────────────────────── */
 .progress-section {{
-  position: sticky;
-  top: 0;
-  z-index: 100;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: 8px 16px 10px;
@@ -174,7 +175,6 @@ header h1 {{
 
 /* ── Controls ─────────────────────────────────────── */
 .controls {{
-  position: sticky; top: 57px; z-index: 90;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: 10px 16px;
@@ -322,7 +322,7 @@ main {{
   header h1 {{ font-size: .9rem; }}
   .q-text {{ font-size: .97rem; }}
   .opt-btn {{ font-size: .91rem; padding: 11px 12px; min-height: 52px; }}
-  .controls {{ top: 53px; flex-wrap: wrap; }}
+  .controls {{ flex-wrap: wrap; }}
   #law-select {{ width: 100%; }}
   #search-input {{ flex: 1 1 140px; }}
   .progress-section {{ padding: 6px 12px 8px; }}
@@ -331,19 +331,21 @@ main {{
 </head>
 <body>
 
-<header>
-  <h1>營造業丙種職業安全衛生<br>業務主管題庫</h1>
-  <button id="theme-btn" title="切換深色模式" aria-label="切換深色模式">🌙</button>
-</header>
+<div class="sticky-top">
+  <header>
+    <h1>營造業丙種職業安全衛生<br>業務主管題庫</h1>
+    <button id="theme-btn" title="切換深色模式" aria-label="切換深色模式">🌙</button>
+  </header>
 
-<!-- Progress bar (always shows global progress across all 402 questions) -->
-<div class="progress-section">
-  <div class="progress-meta">
-    <span class="progress-label" id="progress-label">已作答 0 / {total} 題</span>
-    <span class="progress-pct" id="progress-pct">0%</span>
-  </div>
-  <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="{total}" aria-valuenow="0" id="progress-track">
-    <div class="progress-fill" id="progress-fill"></div>
+  <!-- Progress bar (always shows global progress across all 402 questions) -->
+  <div class="progress-section">
+    <div class="progress-meta">
+      <span class="progress-label" id="progress-label">已作答 0 / {total} 題</span>
+      <span class="progress-pct" id="progress-pct">0%</span>
+    </div>
+    <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="{total}" aria-valuenow="0" id="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
   </div>
 </div>
 
