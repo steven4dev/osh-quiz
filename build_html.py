@@ -139,9 +139,13 @@ header h1 {{
 
 /* ── Progress bar ─────────────────────────────────── */
 .progress-section {{
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: 8px 16px 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
 }}
 .progress-meta {{
   display: flex; justify-content: space-between; align-items: baseline;
