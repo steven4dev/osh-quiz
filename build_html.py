@@ -219,6 +219,14 @@ header h1 {{
   cursor: pointer;
 }}
 #reset-progress-btn:hover {{ border-color: var(--primary); color: var(--primary); }}
+#export-btn, #import-btn {{
+  font-size: .8rem; padding: 6px 10px;
+  background: var(--surface2); color: var(--text2);
+  border: 1px solid var(--border); border-radius: 8px;
+  cursor: pointer;
+}}
+#export-btn:hover {{ border-color: #0f7a42; color: #0f7a42; }}
+#import-btn:hover {{ border-color: var(--primary); color: var(--primary); }}
 
 /* ── Main grid ────────────────────────────────────── */
 main {{
@@ -364,6 +372,9 @@ main {{
     <span id="stats"></span>
     <button id="clear-wrong-btn" title="清除錯題記錄">清除錯題本</button>
     <button id="reset-progress-btn" title="重置所有作答記錄">重置進度</button>
+    <button id="export-btn" title="匯出作答紀錄（JSON）">⬇ 匯出</button>
+    <button id="import-btn" title="匯入作答紀錄（JSON）">⬆ 匯入</button>
+    <input id="import-file" type="file" accept=".json" style="display:none">
   </div>
 </div>
 
@@ -629,6 +640,69 @@ document.getElementById('reset-progress-btn').addEventListener('click', () => {{
   saveWrong();
   updateProgress();
   render();
+}});
+
+// ── Export / Import ───────────────────────────────────────────────────────────
+document.getElementById('export-btn').addEventListener('click', () => {{
+  const payload = {{
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    wrong: [...wrongSet],
+    answered: Object.fromEntries(
+      [...answered.entries()].map(([id, {{chosen}}]) => [id, chosen])
+    ),
+  }};
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {{type: 'application/json'}});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const date = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `osh-quiz-backup-${{date}}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}});
+
+document.getElementById('import-btn').addEventListener('click', () => {{
+  document.getElementById('import-file').value = '';
+  document.getElementById('import-file').click();
+}});
+
+document.getElementById('import-file').addEventListener('change', e => {{
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {{
+    try {{
+      const data = JSON.parse(ev.target.result);
+      if (data.version !== 1 || !Array.isArray(data.wrong) || typeof data.answered !== 'object') {{
+        alert('⚠️ 檔案格式不正確，請選擇由本系統匯出的 JSON 檔。');
+        return;
+      }}
+      const wCnt = data.wrong.length;
+      const aCnt = Object.keys(data.answered).length;
+      if (!confirm(`確定匯入此紀錄？\\n・已作答：${{aCnt}} 題\\n・錯題本：${{wCnt}} 題\\n\\n⚠️ 匯入後將覆蓋目前的進度！`)) return;
+
+      // Restore wrong set
+      wrongSet = new Set(data.wrong.map(Number));
+      saveWrong();
+
+      // Restore answered map
+      answered.clear();
+      for (const [k, chosen] of Object.entries(data.answered)) {{
+        const id = +k;
+        const q = QUESTIONS.find(q => q.id === id);
+        if (q) answered.set(id, {{chosen: +chosen, correct: q.answer}});
+      }}
+      saveAnswered();
+
+      updateProgress();
+      render();
+      alert(`✅ 匯入完成！已作答 ${{answered.size}} 題，錯題本 ${{wrongSet.size}} 題。`);
+    }} catch (_) {{
+      alert('⚠️ 讀取失敗，請確認檔案是否為有效的 JSON。');
+    }}
+  }};
+  reader.readAsText(file);
 }});
 
 // ── Dark mode ─────────────────────────────────────────────────────────────────
