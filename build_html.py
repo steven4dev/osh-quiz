@@ -141,6 +141,10 @@ header h1 {{
   font-size: 1rem; font-weight: 700; flex: 1;
   line-height: 1.3;
 }}
+header h1 small {{
+  font-size: .72rem; font-weight: 400; opacity: .8;
+  white-space: nowrap;
+}}
 #theme-btn {{
   background: rgba(255,255,255,.2); border: none;
   border-radius: 8px; padding: 6px 10px;
@@ -349,7 +353,7 @@ main {{
 
 <div class="sticky-top">
   <header>
-    <h1>營造業丙種職業安全衛生<br>業務主管題庫</h1>
+    <h1>營造業丙種職業安全衛生<br>業務主管題庫 <small>112.05.16 版</small></h1>
     <button id="theme-btn" title="切換深色模式" aria-label="切換深色模式">🌙</button>
   </header>
 
