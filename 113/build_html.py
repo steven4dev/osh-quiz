@@ -303,6 +303,18 @@ main {{
 .opt-btn.wrong {{
   background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong);
 }}
+/* 反向題：正確答案 = 唯一錯誤選項，黃底刪除線 */
+.opt-btn.correct-neg {{
+  background: #fffde7; border-color: #f9a825; color: #5d4037;
+  font-weight: 600;
+  text-decoration: line-through;
+  text-decoration-color: #e65100;
+  text-decoration-thickness: 2px;
+}}
+[data-theme="dark"] .opt-btn.correct-neg {{
+  background: #3e2f00; border-color: #f9a825; color: #ffe082;
+  text-decoration-color: #ffb300;
+}}
 
 /* Result row */
 .result-row {{
@@ -313,6 +325,8 @@ main {{
 }}
 .result-row.show {{ display: flex; }}
 .result-row.ok {{ background: var(--correct-bg); color: var(--correct); }}
+.result-row.ok.neg {{ background: #fffde7; color: #e65100; }}
+[data-theme="dark"] .result-row.ok.neg {{ background: #3e2f00; color: #ffb300; }}
 .result-row.bad {{ background: var(--wrong-bg); color: var(--wrong); }}
 .result-row.multi {{ background: #e8eaf6; color: #3949ab; }}
 .retry-btn {{
@@ -481,12 +495,12 @@ function renderCard(q) {{
   const ans = answered.get(q.id);
   const wasWrong = wrongSet.has(q.id);
   const multi = isMultiple(q);
+  const isNeg = !!q.isNegative;  // 反向題：正確答案為唯一錯誤選項
 
   // Card border class
   let cardCls = 'card';
   if (ans) {{
     if (multi) {{
-      // Multiple: answered-ok if user clicked a correct option
       cardCls += q.answer.includes(ans.chosen) ? ' answered-ok' : ' was-wrong';
     }} else {{
       cardCls += ans.chosen === q.answer ? ' answered-ok' : ' was-wrong';
@@ -502,11 +516,10 @@ function renderCard(q) {{
     if (ans) {{
       disabled = 'disabled';
       if (multi) {{
-        // Highlight ALL correct options
         if (q.answer.includes(num)) cls += ' correct';
         else if (num === ans.chosen) cls += ' wrong';
       }} else {{
-        if (num === q.answer) cls += ' correct';
+        if (num === q.answer) cls += isNeg ? ' correct-neg' : ' correct';
         else if (num === ans.chosen) cls += ' wrong';
       }}
     }}
@@ -522,9 +535,14 @@ function renderCard(q) {{
       const cls2 = hitCorrect ? 'ok' : 'bad';
       resultHtml = `<div class="result-row ${{cls2}} show">☑ 複選題 — 正確選項：${{correctLabels}}<button class="retry-btn" data-id="${{q.id}}">重試</button></div>`;
     }} else if (ans.chosen === q.answer) {{
-      resultHtml = `<div class="result-row ok show">✅ 答對了！<button class="retry-btn" data-id="${{q.id}}">重試</button></div>`;
+      const okCls = isNeg ? 'result-row ok neg show' : 'result-row ok show';
+      const okMsg = isNeg
+        ? '⚠️ 答對！（此選項為題目中唯一錯誤的）'
+        : '✅ 答對了！';
+      resultHtml = `<div class="${{okCls}}">${{okMsg}}<button class="retry-btn" data-id="${{q.id}}">重試</button></div>`;
     }} else {{
-      resultHtml = `<div class="result-row bad show">❌ 答錯！正解是 (${{q.answer}}) ${{q.options[q.answer - 1]}}<button class="retry-btn" data-id="${{q.id}}">重試</button></div>`;
+      const negHint = isNeg ? '（反向題，選最不正確的）' : '';
+      resultHtml = `<div class="result-row bad show">❌ 答錯！${{negHint}}正解是 (${{q.answer}}) ${{q.options[q.answer - 1]}}<button class="retry-btn" data-id="${{q.id}}">重試</button></div>`;
     }}
   }}
 
