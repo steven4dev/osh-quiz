@@ -1107,7 +1107,7 @@
     "chapter": "第二章 職業安全衛生相關法規",
     "isNumeric": true,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 75,
@@ -3447,7 +3447,7 @@
     "chapter": "第九章 墜落危害預防管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 231,
@@ -3841,7 +3841,7 @@
     "chapter": "第十章 機械安全管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 257,
@@ -4081,7 +4081,7 @@
     "chapter": "第十章 機械安全管理實務",
     "isNumeric": true,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 273,
@@ -4336,7 +4336,7 @@
     "chapter": "第十一章 火災爆炸危害預防管理實務",
     "isNumeric": true,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 290,
@@ -4909,7 +4909,7 @@
     "chapter": "第十三章 倒塌崩塌危害預防管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 328,
@@ -4954,7 +4954,7 @@
     "chapter": "第十三章 倒塌崩塌危害預防管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 331,
@@ -6199,7 +6199,7 @@
     "chapter": "第十六章 職場健康管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 414,
@@ -6259,7 +6259,7 @@
     "chapter": "第十六章 職場健康管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 418,

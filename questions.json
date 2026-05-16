@@ -123,7 +123,7 @@
     "answer": 3,
     "law": "職業安全衛生設施規則",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 10,
@@ -361,7 +361,7 @@
     "answer": 4,
     "law": "營造安全衛生設施標準",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 27,
@@ -403,7 +403,7 @@
     "answer": 1,
     "law": "營造安全衛生設施標準",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 30,
@@ -1425,7 +1425,7 @@
     "answer": 1,
     "law": "營造安全衛生設施標準",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 103,
@@ -1726,9 +1726,7 @@
     "text": "某橋梁工程上部結構施工現況如照片所示，應採行之對策為何？",
     "options": [
       "以繩索綁紮於組立之鋼筋上",
-      "確實使用背負式安全帶並勾掛於妥適錨錠處",
-      "（配合照片，詳見原題冊）",
-      "（配合照片，詳見原題冊）"
+      "確實使用背負式安全帶並勾掛於妥適錨錠處"
     ],
     "answer": 2,
     "law": "營造安全衛生設施標準",
@@ -1845,7 +1843,7 @@
     "answer": 1,
     "law": "職業安全衛生法",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 133,
@@ -2447,7 +2445,7 @@
     "answer": 2,
     "law": "營造安全衛生設施標準",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 176,
@@ -2461,7 +2459,7 @@
     "answer": 2,
     "law": "營造安全衛生設施標準",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 177,
@@ -2573,7 +2571,7 @@
     "answer": 2,
     "law": "營造安全衛生設施標準",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 185,
@@ -3119,7 +3117,7 @@
     "answer": 1,
     "law": "營造安全衛生設施標準",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 224,
@@ -5317,7 +5315,7 @@
     "answer": 3,
     "law": "營造安全衛生設施標準",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 381,
@@ -5331,7 +5329,7 @@
     "answer": 3,
     "law": "營造安全衛生設施標準",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 382,
@@ -5415,7 +5413,7 @@
     "answer": 4,
     "law": "職業安全衛生法",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 388,

@@ -57,6 +57,15 @@ RE_CHINESE_NUM = re.compile(
 # Sequence-order options (efcdab, fecdba, abcde etc.)
 RE_SEQ_ALPHA = re.compile(r"^[a-g]{4,7}$")
 
+# Negative questions: correct answer is the unique WRONG option
+RE_NEGATIVE = re.compile(
+    r"何者(非(?!常)|為非|不是|不正確|有誤|錯誤|不符合|不屬於|不包括|不適當)"
+    r"|何者.{0,6}[「\"](?:非|不)[」\"]"
+    r"|下列.{0,20}(?:有誤|不正確|錯誤的|不符合|非正確)"
+    r"|哪.{0,5}(?:不正確|有誤|錯誤)",
+    re.UNICODE
+)
+
 
 def is_numeric(text, options):
     combined = text + " " + " ".join(options)
@@ -193,6 +202,7 @@ def parse_questions(full_text):
 
         law = classify_law(q_text, options)
         numeric = is_numeric(q_text, options)
+        negative = bool(RE_NEGATIVE.search(q_text))
 
         questions.append({
             "id": qnum,
@@ -201,6 +211,7 @@ def parse_questions(full_text):
             "answer": answer,
             "law": law,
             "isNumeric": numeric,
+            "isNegative": negative,
         })
 
     # Deduplicate (keep first occurrence of each id)

@@ -66,6 +66,14 @@ def parse_chapter(text, chapter_name, start_id):
         r"|[一二三四五六七八九十百千]+[\s]*(年|個月|小時|公尺|公分|人|倍|日)",
         re.IGNORECASE
     )
+    # Regex for negative questions (反向題)
+    RE_NEGATIVE = re.compile(
+        r"何者(非(?!常)|為非|不是|不正確|有誤|錯誤|不符合|不屬於|不包括|不適當)"
+        r"|何者.{0,6}[「\"](?:非|不)[」\"]"
+        r"|下列.{0,20}(?:有誤|不正確|錯誤的|不符合|非正確)"
+        r"|哪.{0,5}(?:不正確|有誤|錯誤)",
+        re.UNICODE
+    )
 
     q_id = start_id
 
@@ -173,6 +181,7 @@ def parse_chapter(text, chapter_name, start_id):
             "chapter": chapter_name,
             "isNumeric": is_numeric,
             "isMultiple": is_multiple,
+            "isNegative": bool(RE_NEGATIVE.search(q_text)),
         })
         q_id += 1
 
