@@ -60,7 +60,7 @@ HTML = f"""<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>113年職業安全衛生業務主管精選題庫</title>
+<title>營造業丙種職業安全衛生業務主管題庫【113年版精選471題】</title>
 <style>
 /* ── Reset & Base ─────────────────────────────────── */
 *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
@@ -351,7 +351,7 @@ main {{
 
 <div class="sticky-top">
   <header>
-    <h1>113年 職業安全衛生業務主管<br>精選題庫 <small>471 題</small></h1>
+    <h1>營造業丙種職業安全衛生<br>業務主管題庫<small>【113年版 (甲、乙、丙種)精選(471 題)】</small></h1>
     <button id="theme-btn" title="切換深色模式" aria-label="切換深色模式">🌙</button>
   </header>
 
