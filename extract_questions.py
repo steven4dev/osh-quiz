@@ -68,6 +68,12 @@ def is_numeric(text, options):
     seq = sum(1 for o in options if RE_SEQ_ALPHA.match(o.strip().lower()))
     if seq >= 3:
         return True
+    # Options are bare numbers (unit implied in question text)
+    # e.g. options "1", "3", "6", "12" when question asks "幾個月"
+    # ≤4 digits only: excludes 5-digit排列順序 sequences like "24153"
+    bare = sum(1 for o in options if re.match(r"^\d{1,4}\s*(以上|以下|以內)?$", o.strip()))
+    if bare >= 2:
+        return True
     return False
 
 

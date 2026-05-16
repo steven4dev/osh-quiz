@@ -486,7 +486,7 @@
     ],
     "answer": 3,
     "chapter": "第二章 職業安全衛生相關法規",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -626,7 +626,7 @@
     ],
     "answer": 1,
     "chapter": "第二章 職業安全衛生相關法規",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -640,7 +640,7 @@
     ],
     "answer": 4,
     "chapter": "第二章 職業安全衛生相關法規",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -822,7 +822,7 @@
     ],
     "answer": 1,
     "chapter": "第二章 職業安全衛生相關法規",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -836,7 +836,7 @@
     ],
     "answer": 2,
     "chapter": "第二章 職業安全衛生相關法規",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -934,7 +934,7 @@
     ],
     "answer": 1,
     "chapter": "第二章 職業安全衛生相關法規",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -976,7 +976,7 @@
     ],
     "answer": 3,
     "chapter": "第二章 職業安全衛生相關法規",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -1060,7 +1060,7 @@
     ],
     "answer": 2,
     "chapter": "第二章 職業安全衛生相關法規",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -1074,7 +1074,7 @@
     ],
     "answer": 2,
     "chapter": "第二章 職業安全衛生相關法規",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -1536,7 +1536,7 @@
     ],
     "answer": 3,
     "chapter": "第三章 職業安全衛生概論",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -1564,7 +1564,7 @@
     ],
     "answer": 1,
     "chapter": "第三章 職業安全衛生概論",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -1592,7 +1592,7 @@
     ],
     "answer": 2,
     "chapter": "第三章 職業安全衛生概論",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -1620,7 +1620,7 @@
     ],
     "answer": 3,
     "chapter": "第三章 職業安全衛生概論",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -1984,7 +1984,7 @@
     ],
     "answer": 1,
     "chapter": "第四章 職業安全衛生管理系統介紹",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -2012,7 +2012,7 @@
     ],
     "answer": 2,
     "chapter": "第四章 職業安全衛生管理系統介紹",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -2040,7 +2040,7 @@
     ],
     "answer": 2,
     "chapter": "第四章 職業安全衛生管理系統介紹",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -2096,7 +2096,7 @@
     ],
     "answer": 1,
     "chapter": "第四章 職業安全衛生管理系統介紹",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -3146,7 +3146,7 @@
     ],
     "answer": 3,
     "chapter": "第八章 緊急應變管理",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -3174,7 +3174,7 @@
     ],
     "answer": 3,
     "chapter": "第九章 墜落危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -3342,7 +3342,7 @@
     ],
     "answer": 1,
     "chapter": "第九章 墜落危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -3468,7 +3468,7 @@
     ],
     "answer": 1,
     "chapter": "第九章 墜落危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -3836,7 +3836,7 @@
     ],
     "answer": 3,
     "chapter": "第十章 機械安全管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -4875,7 +4875,7 @@
     ],
     "answer": 2,
     "chapter": "第十四章 化學性危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -4903,7 +4903,7 @@
     ],
     "answer": 4,
     "chapter": "第十四章 化學性危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -4917,7 +4917,7 @@
     ],
     "answer": 3,
     "chapter": "第十四章 化學性危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -4959,7 +4959,7 @@
     ],
     "answer": 3,
     "chapter": "第十四章 化學性危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -5113,7 +5113,7 @@
     ],
     "answer": 3,
     "chapter": "第十四章 化學性危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -5477,7 +5477,7 @@
     ],
     "answer": 3,
     "chapter": "第十五章 物理性危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -5491,7 +5491,7 @@
     ],
     "answer": 3,
     "chapter": "第十五章 物理性危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -5505,7 +5505,7 @@
     ],
     "answer": 4,
     "chapter": "第十五章 物理性危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -5519,7 +5519,7 @@
     ],
     "answer": 4,
     "chapter": "第十五章 物理性危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -5589,7 +5589,7 @@
     ],
     "answer": 1,
     "chapter": "第十五章 物理性危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -5799,7 +5799,7 @@
     ],
     "answer": 1,
     "chapter": "第十六章 職場健康管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -5939,7 +5939,7 @@
     ],
     "answer": 2,
     "chapter": "第十六章 職場健康管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -6373,7 +6373,7 @@
     ],
     "answer": 2,
     "chapter": "第十七章 職業災害調查處理與統計",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -6527,7 +6527,7 @@
     ],
     "answer": 4,
     "chapter": "第十七章 職業災害調查處理與統計",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {
@@ -6541,7 +6541,7 @@
     ],
     "answer": 1,
     "chapter": "第十七章 職業災害調查處理與統計",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false
   },
   {

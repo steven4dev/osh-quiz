@@ -157,6 +157,13 @@ def parse_chapter(text, chapter_name, start_id):
         is_numeric = bool(RE_NUM.search(all_text)) or bool(
             re.search(r"[一二三四五六七八九]、[一二三四五六七八九]、", all_text)
         )
+        # Also flag when options are bare numbers (unit is implied in question text)
+        # e.g. options "1", "3", "6", "12" where question asks "幾個月"
+        if not is_numeric:
+            # Bare numbers with ≤4 digits: "7", "30", "3000" = quantity questions
+            # Excludes 5-digit sequences like "24153" (排列順序題)
+            bare = sum(1 for opt in options if re.match(r"^\d{1,4}\s*(以上|以下|以內)?$", opt.strip()))
+            is_numeric = bare >= 2
 
         questions.append({
             "id": q_id,

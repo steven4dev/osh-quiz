@@ -231,7 +231,7 @@
     ],
     "answer": 2,
     "law": "起重升降機具安全規則",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 19,
@@ -699,7 +699,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生教育訓練規則",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 55,
@@ -959,7 +959,7 @@
     ],
     "answer": 3,
     "law": "職業安全衛生設施規則",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 75,
@@ -1219,7 +1219,7 @@
     ],
     "answer": 2,
     "law": "起重升降機具安全規則",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 95,
@@ -1791,7 +1791,7 @@
     ],
     "answer": 4,
     "law": "營造安全衛生設施標準",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 139,
@@ -1856,7 +1856,7 @@
     ],
     "answer": 1,
     "law": "職業安全衛生法",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 144,
@@ -1895,7 +1895,7 @@
     ],
     "answer": 3,
     "law": "勞動檢查法",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 147,
@@ -1960,7 +1960,7 @@
     ],
     "answer": 1,
     "law": "職業安全衛生設施規則",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 152,
@@ -2129,7 +2129,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生法",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 165,
@@ -2142,7 +2142,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生法",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 166,
@@ -2701,7 +2701,7 @@
     ],
     "answer": 2,
     "law": "營造安全衛生設施標準",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 209,
@@ -2714,7 +2714,7 @@
     ],
     "answer": 2,
     "law": "營造安全衛生設施標準",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 210,
@@ -3000,7 +3000,7 @@
     ],
     "answer": 3,
     "law": "營造安全衛生設施標準",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 232,
@@ -3117,7 +3117,7 @@
     ],
     "answer": 3,
     "law": "營造安全衛生設施標準",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 241,
@@ -3130,7 +3130,7 @@
     ],
     "answer": 2,
     "law": "營造安全衛生設施標準",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 242,
@@ -3234,7 +3234,7 @@
     ],
     "answer": 2,
     "law": "營造安全衛生設施標準",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 250,
@@ -3247,7 +3247,7 @@
     ],
     "answer": 3,
     "law": "營造安全衛生設施標準",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 251,
@@ -3260,7 +3260,7 @@
     ],
     "answer": 3,
     "law": "營造安全衛生設施標準",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 252,
@@ -3273,7 +3273,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生法",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 253,
@@ -4027,7 +4027,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生法",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 311,
@@ -4040,7 +4040,7 @@
     ],
     "answer": 1,
     "law": "職業安全衛生設施規則",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 312,
@@ -4196,7 +4196,7 @@
     ],
     "answer": 3,
     "law": "營造安全衛生設施標準",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 324,
@@ -4313,7 +4313,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生設施規則",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 333,
@@ -5210,7 +5210,7 @@
     ],
     "answer": 1,
     "law": "勞動檢查法",
-    "isNumeric": false
+    "isNumeric": true
   },
   {
     "id": 402,
