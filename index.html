@@ -735,6 +735,18 @@ themeBtn.addEventListener('click', () => {
   applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
 });
 
+// ── Fullscreen (F key) ───────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if ((e.key === 'f' || e.key === 'F') &&
+      document.activeElement !== document.getElementById('search-input')) {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+});
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 updateProgress();
 render();
