@@ -63,6 +63,23 @@ body {
   --shadow: 0 2px 8px rgba(0,0,0,.35);
 }
 
+/* ── Site nav ─────────────────────────────────────── */
+.site-nav {
+  background: var(--primary-dark);
+  padding: 4px 16px;
+  display: flex; gap: 4px; align-items: center;
+  font-size: .76rem;
+}
+.site-nav a, .site-nav .cur {
+  color: rgba(255,255,255,.75);
+  text-decoration: none;
+  padding: 2px 8px; border-radius: 4px;
+  white-space: nowrap;
+}
+.site-nav a:hover { color: #fff; background: rgba(255,255,255,.15); }
+.site-nav .cur { color: #fff; font-weight: 700; background: rgba(255,255,255,.2); }
+.site-nav .sep { color: rgba(255,255,255,.3); }
+
 /* ── Sticky top wrapper ───────────────────────────── */
 .sticky-top {
   position: sticky; top: 0; z-index: 100;
@@ -308,6 +325,13 @@ main {
 <body>
 
 <div class="sticky-top">
+  <nav class="site-nav">
+    <a href="/osh-quiz/">112版</a>
+    <span class="sep">|</span>
+    <span class="cur">113版</span>
+    <span class="sep">|</span>
+    <a href="/osh-quiz/kyso/">缺氧作業主管</a>
+  </nav>
   <header>
     <h1>營造業丙種職業安全衛生<br>業務主管題庫<small>【113年版 (甲、乙、丙種)精選(471 題)】</small></h1>
     <button id="theme-btn" title="切換深色模式" aria-label="切換深色模式">🌙</button>
