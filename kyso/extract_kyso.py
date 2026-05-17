@@ -53,7 +53,95 @@ def is_numeric(text, options):
     bare = sum(1 for o in options if re.match(r"^\d{1,4}\s*(以上|以下|以內)?$", o.strip()))
     return bare >= 2
 
+# ── Chapter classification (for non-22200乙級 sources) ────────────────────────
+# 6 chapters of the 缺氧作業主管 course.
+# Rules: ordered by specificity (first match wins).
+CHAPTER_RULES = [
+    # Ch4: Emergency & First Aid — most distinct keywords
+    ("第4章 缺氧事故處理與急救", [
+        "急救", "CPR", "心肺復甦", "心外按摩", "人工呼吸",
+        "燒燙傷", "沖、脫、泡", "施救者", "傷患", "AED",
+        "心臟停止跳動", "生命徵象", "失去意識",
+        "人工呼吸法", "復甦術", "昏倒", "昏迷.*救",
+        "援救者", "救援者", "搶救.*防護", "中毒.*搶救",
+        "缺氧症.*症狀", "缺氧.*症狀", "症狀.*缺氧",
+        "意識.*喪失", "呼吸停止",
+    ]),
+    # Ch5: Environmental Measurement — instrument / sampling / exposure standard
+    ("第5章 缺氧危險場所之環境測定", [
+        "採樣", "檢知管", "直讀式儀器", "採樣管", "採樣器",
+        "採氣管", "吸附劑", "活性碳", "Mesh",
+        "流率", "攝氏.*大氣壓",
+        "TWA", "STEL", "IDLH",
+        "容許暴露標準", "短時間時量", "八小時日時量",
+        "採樣後分析", "垂直.*水平.*測定",
+        "感知器.*軟泥", "測定點.*垂直",
+        "作業環境監測",
+        "呼氣閥.*採樣",
+    ]),
+    # Ch2: Hazard Prevention & PPE — equipment-focused
+    ("第2章 缺氧危險場所危害預防及安全衛生防護具", [
+        "空氣呼吸器", "輸氣管面罩", "輸氣管面具", "壓縮機式氣",
+        "肺力式自攜", "供氣式呼吸防護", "自攜式呼吸",
+        "過濾式防毒面罩", "防護衣", "不浸透性防護",
+        "防護因數", "PF為",
+        "SDS", "安全資料表", "GHS",
+        "危害性化學品.*標示", "危害圖示", "化學品.*標示",
+        "選購防護具", "個人防護具", "個人防護",
+        "防護用品",
+    ]),
+    # Ch3: Safety Management & Execution — supervisory/procedural keywords
+    ("第3章 缺氧危險作業安全衛生管理與執行", [
+        "缺氧作業主管", "作業主管.*監督", "監視人員",
+        "許可進入", "進入許可", "作業許可",
+        "協議組織", "原事業單位.*承攬", "承攬.*原事業單位",
+        "自動檢查", "作業檢點",
+        "局限空間.*作業", "局限空間.*特徵", "局限空間.*危害預防",
+        "缺氧危險作業.*主管",
+        "換氣裝置.*確認", "確認.*換氣裝置",
+        "進出.*簽名", "點名確認", "進出.*確認",
+        "盲板", "關閉.*管閥",
+        "作業前.*換氣", "換氣.*作業前",
+        "爆炸下限.*換氣",
+    ]),
+    # Ch6: 缺氧症預防規則 — specific legal requirements & defined places
+    ("第6章 缺氧症預防規則", [
+        "缺氧症預防規則",
+        "氧氣濃度未滿18", "未滿百分之十八", "未滿18%",
+        "缺氧危隩作業場所", "缺氧危險場所.*下列",
+        "屬缺氧危險", "非屬缺氧危險",
+        "乾性油", "保溫棉",
+        "連續作業時間.*超過", "不得超過.*小時",
+        "5倍.*換氣", "換氣.*5倍",
+        "缺氧係指", "純氧.*換氣", "換氣.*純氧",
+        "儲槽.*缺氧", "缺氧.*儲槽",
+        "缺氧.*何種.*場所", "何種.*場所.*缺氧",
+    ]),
+    # Ch1: General Laws Overview — fallback for all law/regulation questions
+    ("第1章 缺氧危險作業及局限空間作業相關法規概要", [
+        ""  # sentinel: always matches (fallback)
+    ]),
+]
+
+def classify_chapter(text, options_str):
+    """Map question to one of 6 course chapters via keyword rules."""
+    combined = text + " " + options_str
+    for chapter, keywords in CHAPTER_RULES:
+        for kw in keywords:
+            if kw == "":          # fallback
+                return chapter
+            if re.search(kw, combined):
+                return chapter
+    return "第1章 缺氧危險作業及局限空間作業相關法規概要"
+
+
 def make_q(qid, qtype, text, options, answer, source, section=""):
+    # Chapter field: 22200乙級 uses its 工作項目 section; others get keyword-classified
+    if source == "22200乙級":
+        chapter = section or "22200乙級"
+    else:
+        chapter = classify_chapter(text, " ".join(options))
+
     return {
         "id": qid,
         "type": qtype,          # "single" | "truefalse"
@@ -62,6 +150,7 @@ def make_q(qid, qtype, text, options, answer, source, section=""):
         "answer": answer,       # 1-based int
         "source": source,
         "section": section,
+        "chapter": chapter,
         "isNumeric": is_numeric(text, options) if qtype == "single" else False,
         "isNegative": bool(RE_NEGATIVE.search(text)),
     }

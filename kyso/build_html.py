@@ -10,6 +10,7 @@ with open("questions.json", encoding="utf-8") as f:
 js_data = json.dumps(questions, ensure_ascii=False, separators=(",", ":"))
 
 src_counts = Counter(q["source"] for q in questions)
+ch_counts  = Counter(q["chapter"] for q in questions)
 numeric_count = sum(1 for q in questions if q.get("isNumeric"))
 tf_count = sum(1 for q in questions if q["type"] == "truefalse")
 total = len(questions)
@@ -21,13 +22,41 @@ SOURCES_ORDER = [
     "複習測驗題",
 ]
 
+CHAPTERS_ORDER = [
+    "第1章 缺氧危險作業及局限空間作業相關法規概要",
+    "第2章 缺氧危險場所危害預防及安全衛生防護具",
+    "第3章 缺氧危險作業安全衛生管理與執行",
+    "第4章 缺氧事故處理與急救",
+    "第5章 缺氧危險場所之環境測定",
+    "第6章 缺氧症預防規則",
+]
+
+WORK_ITEMS_ORDER = [
+    "工作項目01：丙種職業安全衛生業務主管",
+    "工作項目03：專業科目",
+]
+
 def make_options_html():
     lines = []
+    # Special filters
     lines.append(f'<option value="全部">全部（{total} 題）</option>\n')
     lines.append('<option value="未完成" id="opt-incomplete">📝 未完成</option>\n')
     lines.append('<option value="錯題本">⭐ 我的錯題本</option>\n')
     lines.append(f'<option value="金庫密碼">🔢 金庫密碼（{numeric_count} 題）</option>\n')
     lines.append(f'<option value="是非題">✅ 是非題（{tf_count} 題）</option>\n')
+    # 依章節 (非22200三來源)
+    lines.append('<optgroup label="── 依章節（缺氧3來源）──">\n')
+    for ch in CHAPTERS_ORDER:
+        cnt = ch_counts.get(ch, 0)
+        lines.append(f'<option value="{ch}">{ch}（{cnt} 題）</option>\n')
+    lines.append('</optgroup>\n')
+    # 依工作項目 (22200乙級)
+    lines.append('<optgroup label="── 依工作項目（22200乙級）──">\n')
+    for wi in WORK_ITEMS_ORDER:
+        cnt = ch_counts.get(wi, 0)
+        lines.append(f'<option value="{wi}">{wi}（{cnt} 題）</option>\n')
+    lines.append('</optgroup>\n')
+    # 依來源
     lines.append('<optgroup label="── 依來源 ──">\n')
     for src in SOURCES_ORDER:
         cnt = src_counts.get(src, 0)
@@ -613,7 +642,7 @@ function filteredQuestions() {{
   }} else if (currentFilter === '未完成') {{
     list = list.filter(q => !answered.has(q.id));
   }} else if (currentFilter !== '全部') {{
-    list = list.filter(q => q.source === currentFilter);
+    list = list.filter(q => q.chapter === currentFilter || q.source === currentFilter);
   }}
   if (currentSearch) {{
     const kw = currentSearch.trim().toLowerCase();
@@ -631,7 +660,7 @@ function filteredBase() {{
   if (currentFilter === '是非題') return QUESTIONS.filter(q => q.type === 'truefalse').length;
   if (currentFilter === '未完成') return QUESTIONS.filter(q => !answered.has(q.id)).length;
   if (currentFilter === '全部') return TOTAL;
-  return QUESTIONS.filter(q => q.source === currentFilter).length;
+  return QUESTIONS.filter(q => q.chapter === currentFilter || q.source === currentFilter).length;
 }}
 
 // ── Render grid ───────────────────────────────────────────────────────────────
