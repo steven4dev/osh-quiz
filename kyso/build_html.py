@@ -664,8 +664,8 @@ function renderTFCard(q) {{
   }}
 
   const opts = [
-    {{num: 1, label: '○ 正確', emoji: '○'}},
-    {{num: 2, label: '✕ 錯誤', emoji: '✕'}},
+    {{num: 1, label: '○正確', emoji: '○'}},
+    {{num: 2, label: '✕錯誤', emoji: '✕'}},
   ];
 
   const tfBtns = opts.map(o => {{

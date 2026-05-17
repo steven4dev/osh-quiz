@@ -18,8 +18,14 @@ BASE = Path(__file__).parent.parent / "缺氧作業主管題庫"
 OUT  = Path(__file__).parent / "questions.json"
 
 # ── Shared helpers ─────────────────────────────────────────────────────────────
+_CJK = r'[⺀-鿿＀-￯]'   # CJK + fullwidth chars
+_RE_SPACE_AFTER  = re.compile(rf'(?<={_CJK}) ')   # space right after CJK
+_RE_SPACE_BEFORE = re.compile(rf' (?={_CJK})')    # space right before CJK
+
 def clean(s):
     s = re.sub(r"\s+", " ", s).strip()
+    s = _RE_SPACE_AFTER.sub('', s)   # 進入 作業 → 進入作業
+    s = _RE_SPACE_BEFORE.sub('', s)  # 18 度     → 18度
     return s
 
 NUMERIC_UNITS = (
@@ -572,7 +578,7 @@ def parse_doc():
             continue
         qtext = clean(qtext_raw).rstrip("。")
         if qtext and qnum and qnum <= 30:
-            questions.append(("truefalse", qtext, ["○ 正確", "✕ 錯誤"], answer, "是非題一"))
+            questions.append(("truefalse", qtext, ["○正確", "✕錯誤"], answer, "是非題一"))
             tf1_count += 1
         i += 4  # skip the 4 parts of this question
 
@@ -645,7 +651,7 @@ def parse_doc():
         if not qtext or len(qtext) < 3:
             continue
         answer = 1 if marker in ("O", "○") else 2
-        questions.append(("truefalse", qtext, ["○ 正確", "✕ 錯誤"], answer, "是非題二"))
+        questions.append(("truefalse", qtext, ["○正確", "✕錯誤"], answer, "是非題二"))
         tf2_count += 1
     print(f"  T/F section 2: {tf2_count} questions")
 
