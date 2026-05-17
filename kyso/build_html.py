@@ -11,8 +11,9 @@ js_data = json.dumps(questions, ensure_ascii=False, separators=(",", ":"))
 
 src_counts = Counter(q["source"] for q in questions)
 ch_counts  = Counter(q["chapter"] for q in questions)
-numeric_count = sum(1 for q in questions if q.get("isNumeric"))
-tf_count = sum(1 for q in questions if q["type"] == "truefalse")
+numeric_count  = sum(1 for q in questions if q.get("isNumeric"))
+tf_count       = sum(1 for q in questions if q["type"] == "truefalse")
+multiple_count = sum(1 for q in questions if q["type"] == "multiple")
 total = len(questions)
 
 SOURCES_ORDER = [
@@ -33,6 +34,7 @@ CHAPTERS_ORDER = [
 
 WORK_ITEMS_ORDER = [
     "工作項目01：丙種職業安全衛生業務主管",
+    "工作項目02：丙種職業安全衛生業務主管計畫與管理",
     "工作項目03：專業科目",
 ]
 
@@ -44,6 +46,7 @@ def make_options_html():
     lines.append('<option value="錯題本">⭐ 我的錯題本</option>\n')
     lines.append(f'<option value="金庫密碼">🔢 金庫密碼（{numeric_count} 題）</option>\n')
     lines.append(f'<option value="是非題">✅ 是非題（{tf_count} 題）</option>\n')
+    lines.append(f'<option value="複選題">☑ 複選題（{multiple_count} 題）</option>\n')
     # 依章節 (非22200三來源)
     lines.append('<optgroup label="── 依章節（缺氧3來源）──">\n')
     for ch in CHAPTERS_ORDER:
@@ -363,6 +366,68 @@ main {{
   background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong);
 }}
 
+/* ── Multiple-select: checkboxes + submit ─────────── */
+.multi-options {{ display: flex; flex-direction: column; gap: 7px; }}
+.multi-btn {{
+  width: 100%; text-align: left;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  font-size: .93rem; cursor: pointer;
+  transition: background .15s, border-color .15s;
+  line-height: 1.5;
+  min-height: 44px;
+  display: flex; align-items: center; gap: 8px;
+  position: relative;
+}}
+.multi-btn::before {{
+  content: '';
+  width: 18px; height: 18px; flex-shrink: 0;
+  border-radius: 4px;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  transition: background .15s, border-color .15s;
+}}
+.multi-btn.selected {{
+  border-color: var(--primary);
+  background: var(--tag-bg);
+}}
+.multi-btn.selected::before {{
+  background: var(--primary); border-color: var(--primary);
+  box-shadow: inset 0 0 0 3px #fff;
+}}
+.multi-btn:hover:not(:disabled) {{ border-color: var(--primary); background: var(--tag-bg); }}
+.multi-btn:disabled {{ cursor: default; }}
+.multi-btn.correct {{
+  background: var(--correct-bg); border-color: var(--correct); color: var(--correct);
+  font-weight: 600;
+}}
+.multi-btn.correct::before {{ background: var(--correct); border-color: var(--correct); box-shadow: inset 0 0 0 3px #fff; }}
+.multi-btn.wrong {{
+  background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong);
+}}
+.multi-btn.wrong::before {{ background: var(--wrong); border-color: var(--wrong); box-shadow: inset 0 0 0 3px #fff; }}
+.multi-btn.missed {{
+  background: var(--correct-bg); border-color: var(--correct); color: var(--correct);
+  font-weight: 600; opacity: .7;
+}}
+.multi-submit {{
+  margin-top: 4px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: .93rem; font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, opacity .15s;
+  align-self: flex-start;
+}}
+.multi-submit:hover {{ opacity: .87; }}
+.multi-submit:disabled {{ opacity: .4; cursor: default; }}
+
 /* Result row */
 .result-row {{
   display: none; align-items: center; gap: 8px;
@@ -447,6 +512,7 @@ main {{
 // ── Data ──────────────────────────────────────────────────────────────────────
 const QUESTIONS = {js_data};
 const TOTAL = {total};
+const MULTI_COUNT = {multiple_count};
 
 // ── Persistence keys (kyso site, separate from other sites) ──────────────────
 const WRONG_KEY    = 'kyso_wrong_v1';
@@ -458,7 +524,8 @@ let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
 
 const _savedAnswered = JSON.parse(localStorage.getItem(ANSWERED_KEY) || '{{}}');
 const answered = new Map(
-  Object.entries(_savedAnswered).map(([k, chosen]) => [+k, {{chosen: +chosen}}])
+  // chosen can be int (single/TF) or array (multiple) — don't coerce
+  Object.entries(_savedAnswered).map(([k, chosen]) => [+k, {{chosen}}])
 );
 
 // ── Persist helpers ───────────────────────────────────────────────────────────
@@ -520,6 +587,69 @@ function srcTag(q) {{
   return `<span class="${{cls}}">${{short}}${{badge}}</span>`;
 }}
 
+// ── Multiple-select helpers ───────────────────────────────────────────────────
+function arraysEqual(a, b) {{
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return [...a].sort((x,y)=>x-y).every((v,i) => v === [...b].sort((x,y)=>x-y)[i]);
+}}
+
+// ── Render multiple-select card ───────────────────────────────────────────────
+function renderMultiCard(q) {{
+  const ans = answered.get(q.id);
+  const wasWrong = wrongSet.has(q.id);
+
+  let cardCls = 'card';
+  if (ans) {{
+    cardCls += arraysEqual(ans.chosen, q.answer) ? ' answered-ok' : ' was-wrong';
+  }} else if (wasWrong) {{
+    cardCls += ' was-wrong';
+  }}
+
+  const chosen = ans ? (Array.isArray(ans.chosen) ? ans.chosen : [ans.chosen]) : [];
+
+  const optBtns = q.options.map((opt, i) => {{
+    const num = i + 1;
+    let cls = 'multi-btn';
+    let disabled = '';
+    if (ans) {{
+      disabled = 'disabled';
+      const inAns    = q.answer.includes(num);
+      const inChosen = chosen.includes(num);
+      if (inAns && inChosen)  cls += ' correct';
+      else if (!inAns && inChosen) cls += ' wrong';
+      else if (inAns && !inChosen) cls += ' missed';
+    }} else if (chosen.includes(num)) {{
+      cls += ' selected';
+    }}
+    return `<button class="${{cls}}" ${{disabled}} data-id="${{q.id}}" data-num="${{num}}">${{opt}}</button>`;
+  }}).join('\\n');
+
+  const submitDisabled = ans ? 'disabled' : '';
+  const submitBtn = `<button class="multi-submit" ${{submitDisabled}} data-id="${{q.id}}">確認答案</button>`;
+
+  let resultHtml = '';
+  if (ans) {{
+    const ok = arraysEqual(ans.chosen, q.answer);
+    if (ok) {{
+      resultHtml = `<div class="result-row ok show">✅ 答對了！<button class="retry-btn" data-id="${{q.id}}">重試</button></div>`;
+    }} else {{
+      const correctLabel = q.answer.map(n => `(${{n}})`).join('');
+      resultHtml = `<div class="result-row bad show">❌ 答錯！正解是 ${{correctLabel}}<button class="retry-btn" data-id="${{q.id}}">重試</button></div>`;
+    }}
+  }}
+
+  return `<div class="${{cardCls}}" id="card-${{q.id}}">
+  <div class="card-header">
+    <span class="q-num">Q${{q.id}} <span style="font-size:.75rem;font-weight:400;color:var(--primary)">複選</span></span>
+    ${{srcTag(q)}}
+  </div>
+  <div class="q-text">${{q.text}}</div>
+  <div class="multi-options">${{optBtns}}${{submitBtn}}</div>
+  ${{resultHtml}}
+</div>`;
+}}
+
 // ── Render T/F card ───────────────────────────────────────────────────────────
 function renderTFCard(q) {{
   const ans = answered.get(q.id);
@@ -573,6 +703,7 @@ function renderTFCard(q) {{
 // ── Render single-choice card ─────────────────────────────────────────────────
 function renderCard(q) {{
   if (q.type === 'truefalse') return renderTFCard(q);
+  if (q.type === 'multiple')  return renderMultiCard(q);
 
   const ans = answered.get(q.id);
   const wasWrong = wrongSet.has(q.id);
@@ -639,6 +770,8 @@ function filteredQuestions() {{
     list = list.filter(q => q.isNumeric);
   }} else if (currentFilter === '是非題') {{
     list = list.filter(q => q.type === 'truefalse');
+  }} else if (currentFilter === '複選題') {{
+    list = list.filter(q => q.type === 'multiple');
   }} else if (currentFilter === '未完成') {{
     list = list.filter(q => !answered.has(q.id));
   }} else if (currentFilter !== '全部') {{
@@ -658,6 +791,7 @@ function filteredBase() {{
   if (currentFilter === '錯題本') return wrongSet.size;
   if (currentFilter === '金庫密碼') return QUESTIONS.filter(q => q.isNumeric).length;
   if (currentFilter === '是非題') return QUESTIONS.filter(q => q.type === 'truefalse').length;
+  if (currentFilter === '複選題') return QUESTIONS.filter(q => q.type === 'multiple').length;
   if (currentFilter === '未完成') return QUESTIONS.filter(q => !answered.has(q.id)).length;
   if (currentFilter === '全部') return TOTAL;
   return QUESTIONS.filter(q => q.chapter === currentFilter || q.source === currentFilter).length;
@@ -695,6 +829,7 @@ function render() {{
 
 // ── Event delegation ──────────────────────────────────────────────────────────
 document.getElementById('main-grid').addEventListener('click', e => {{
+  // ── Single / T/F answer ──
   const optBtn = e.target.closest('.opt-btn, .tf-btn');
   if (optBtn && !optBtn.disabled) {{
     const id = +optBtn.dataset.id;
@@ -715,6 +850,41 @@ document.getElementById('main-grid').addEventListener('click', e => {{
     return;
   }}
 
+  // ── Multiple-select: toggle button ──
+  const multiBtn = e.target.closest('.multi-btn');
+  if (multiBtn && !multiBtn.disabled) {{
+    multiBtn.classList.toggle('selected');
+    return;
+  }}
+
+  // ── Multiple-select: submit ──
+  const submitBtn = e.target.closest('.multi-submit');
+  if (submitBtn && !submitBtn.disabled) {{
+    const id = +submitBtn.dataset.id;
+    const card = document.getElementById('card-' + id);
+    const q = QUESTIONS.find(q => q.id === id);
+
+    // Collect selected options
+    const chosen = [];
+    card.querySelectorAll('.multi-btn.selected').forEach(btn => {{
+      chosen.push(+btn.dataset.num);
+    }});
+    chosen.sort((a, b) => a - b);
+
+    answered.set(id, {{chosen}});
+    saveAnswered();
+    updateProgress();
+
+    if (arraysEqual(chosen, q.answer)) unmarkWrong(id);
+    else markWrong(id);
+
+    const tmp = document.createElement('div');
+    tmp.innerHTML = renderCard(q);
+    card.replaceWith(tmp.firstElementChild);
+    return;
+  }}
+
+  // ── Retry ──
   const retryBtn = e.target.closest('.retry-btn');
   if (retryBtn) {{
     const id = +retryBtn.dataset.id;

@@ -275,10 +275,10 @@ def parse_pdf2():
         return sec
 
     # Match question anchors: "N. (answer) text"
-    # Answer in parens like "(3)" before or after number
+    # Answer can be 1-4 digits: "(3)" for single, "(23)" "(124)" for multiple
     RE_Q = re.compile(
         r"^(\d{1,4})\.\s*"           # question number + dot
-        r"\(([1-4])\)\s*"            # answer in parens
+        r"\(([1-4]{1,4})\)\s*"       # answer in parens (1–4 digits for multi-select)
         r"(.+?)$",                   # question text start
         re.MULTILINE
     )
@@ -291,9 +291,16 @@ def parse_pdf2():
     matches = list(RE_Q.finditer(full))
 
     for idx, m in enumerate(matches):
-        qnum   = int(m.group(1))
-        answer = int(m.group(2))
-        pos    = m.start()
+        qnum      = int(m.group(1))
+        ans_raw   = m.group(2)
+        # Single-select: one digit; Multiple-select: 2-4 digits
+        if len(ans_raw) == 1:
+            answer = int(ans_raw)
+            qtype  = "single"
+        else:
+            answer = sorted([int(c) for c in ans_raw])
+            qtype  = "multiple"
+        pos     = m.start()
         section = get_section(pos)
 
         # Collect text from after this match to start of next match
@@ -346,14 +353,15 @@ def parse_pdf2():
         if not q_text:
             continue
 
-        questions.append((qnum, q_text, options, answer, section))
+        questions.append((qnum, q_text, options, answer, section, qtype))
 
-    # Deduplicate
+    # Deduplicate by (section, qnum) — each section restarts from Q1
     seen = set()
     result = []
-    for row in sorted(questions, key=lambda x: x[0]):
-        if row[0] not in seen:
-            seen.add(row[0])
+    for row in sorted(questions, key=lambda x: (x[4], x[0])):
+        key = (row[4], row[0])
+        if key not in seen:
+            seen.add(key)
             result.append(row)
 
     print(f"  Parsed {len(result)} questions")
@@ -719,9 +727,9 @@ def main():
     try:
         pdf2 = parse_pdf2()
         for row in pdf2:
-            qnum, text, options, answer, section = row
+            qnum, text, options, answer, section, qtype = row
             all_questions.append(make_q(
-                qid, "single", text, options, answer,
+                qid, qtype, text, options, answer,
                 source="22200乙級", section=section
             ))
             qid += 1
