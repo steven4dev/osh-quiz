@@ -258,10 +258,17 @@ def parse_pdf2():
     full = re.sub(r"Page \d+ of \d+", "", full)
 
     # Detect section headers: 工作項目 NN：
-    RE_SECTION = re.compile(r"工作項目\s*(\d+)[：:]\s*([^\n]+)")
+    # Hardcode correct names (PDF encoding unreliable)
+    SECTION_NAMES = {
+        "01": "工作項目01：職業安全衛生相關法規",
+        "02": "工作項目02：職業安全衛生計畫與管理",
+        "03": "工作項目03：專業科目",
+    }
+    RE_SECTION = re.compile(r"工作項目\s*(\d+)[：:]")
     section_map = {}   # start_pos → section name
     for m in RE_SECTION.finditer(full):
-        section_map[m.start()] = f"工作項目{m.group(1)}：{m.group(2).strip()}"
+        num = m.group(1).zfill(2)
+        section_map[m.start()] = SECTION_NAMES.get(num, f"工作項目{num}")
 
     section_starts = sorted(section_map.keys())
 
