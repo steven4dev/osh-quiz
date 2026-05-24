@@ -248,7 +248,7 @@
     ],
     "answer": 3,
     "law": "起重升降機具安全規則",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -752,7 +752,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生教育訓練規則",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -766,7 +766,7 @@
     ],
     "answer": 4,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -1032,7 +1032,7 @@
     ],
     "answer": 3,
     "law": "職業安全衛生設施規則",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -1284,7 +1284,7 @@
     ],
     "answer": 4,
     "law": "職業安全衛生法",
-    "isNumeric": false,
+    "isNumeric": true,
     "isNegative": false
   },
   {
@@ -1312,7 +1312,7 @@
     ],
     "answer": 2,
     "law": "起重升降機具安全規則",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -1926,7 +1926,7 @@
     ],
     "answer": 4,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -1996,7 +1996,7 @@
     ],
     "answer": 1,
     "law": "職業安全衛生法",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -2038,7 +2038,7 @@
     ],
     "answer": 3,
     "law": "勞動檢查法",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -2108,7 +2108,7 @@
     ],
     "answer": 1,
     "law": "職業安全衛生設施規則",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -2290,7 +2290,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生法",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -2304,7 +2304,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生法",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -2360,7 +2360,7 @@
     ],
     "answer": 1,
     "law": "職業安全衛生法",
-    "isNumeric": false,
+    "isNumeric": true,
     "isNegative": false
   },
   {
@@ -2906,7 +2906,7 @@
     ],
     "answer": 2,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -2920,7 +2920,7 @@
     ],
     "answer": 2,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -3228,7 +3228,7 @@
     ],
     "answer": 3,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -3354,7 +3354,7 @@
     ],
     "answer": 3,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -3368,7 +3368,7 @@
     ],
     "answer": 2,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -3480,7 +3480,7 @@
     ],
     "answer": 2,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -3494,7 +3494,7 @@
     ],
     "answer": 3,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -3508,7 +3508,7 @@
     ],
     "answer": 3,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -3522,7 +3522,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生法",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -4334,7 +4334,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生法",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -4348,7 +4348,7 @@
     ],
     "answer": 1,
     "law": "職業安全衛生設施規則",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -4516,7 +4516,7 @@
     ],
     "answer": 3,
     "law": "營造安全衛生設施標準",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -4642,7 +4642,7 @@
     ],
     "answer": 2,
     "law": "職業安全衛生設施規則",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {
@@ -5608,7 +5608,7 @@
     ],
     "answer": 1,
     "law": "勞動檢查法",
-    "isNumeric": true,
+    "isNumeric": false,
     "isNegative": false
   },
   {

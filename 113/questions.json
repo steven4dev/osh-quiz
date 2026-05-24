@@ -4396,7 +4396,7 @@
     "chapter": "第十一章 火災爆炸危害預防管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 294,
@@ -4469,7 +4469,7 @@
     ],
     "answer": 4,
     "chapter": "第十二章 感電危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false,
     "isNegative": false
   },
@@ -4499,7 +4499,7 @@
     ],
     "answer": 4,
     "chapter": "第十二章 感電危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false,
     "isNegative": false
   },
@@ -4529,7 +4529,7 @@
     ],
     "answer": 1,
     "chapter": "第十二章 感電危害預防管理實務",
-    "isNumeric": false,
+    "isNumeric": true,
     "isMultiple": false,
     "isNegative": false
   },
