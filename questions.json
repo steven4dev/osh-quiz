@@ -193,7 +193,7 @@
     "answer": 2,
     "law": "起重升降機具安全規則",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 15,

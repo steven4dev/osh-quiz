@@ -79,6 +79,7 @@ def parse_chapter(text, chapter_name, start_id):
         r"|何種.{0,20}無關"
         r"|何不為"
         r"|非屬"
+        r"|不當行為"
         r"|不必(?!的)"
         r"|無須(?!知)",
         re.UNICODE
