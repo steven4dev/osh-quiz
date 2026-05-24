@@ -474,7 +474,7 @@ function updateProgress() {{
   if (accEl) {{
     if (count > 0) {{
       const correctCount = count - wrongSet.size;
-      const accPct = Math.round(correctCount / count * 100);
+      const accPct = (correctCount / count * 100).toFixed(2);
       accEl.textContent = `✓ 正確率 ${{accPct}}%`;
     }} else {{
       accEl.textContent = '';
