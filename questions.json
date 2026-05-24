@@ -2095,7 +2095,7 @@
     "answer": 4,
     "law": "職業安全衛生法",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 151,

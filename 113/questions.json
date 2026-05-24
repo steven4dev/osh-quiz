@@ -177,7 +177,7 @@
     "chapter": "第一章 企業經營風險與安全衛生",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 13,
@@ -552,7 +552,7 @@
     "chapter": "第二章 職業安全衛生相關法規",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 38,
@@ -1722,7 +1722,7 @@
     "chapter": "第三章 職業安全衛生概論",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 116,
@@ -4036,7 +4036,7 @@
     "chapter": "第十章 機械安全管理實務",
     "isNumeric": true,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 270,
@@ -4291,7 +4291,7 @@
     "chapter": "第十一章 火災爆炸危害預防管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 287,
