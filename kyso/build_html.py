@@ -194,6 +194,9 @@ header h1 small {{
 .progress-label {{
   font-size: .82rem; font-weight: 600; color: var(--text2);
 }}
+.accuracy-label {{
+  font-size: .82rem; font-weight: 700; color: var(--correct);
+}}
 .progress-pct {{
   font-size: .82rem; font-weight: 700; color: var(--primary);
   transition: color .4s;
@@ -508,6 +511,7 @@ main {{
   <div class="progress-section">
     <div class="progress-meta">
       <span class="progress-label" id="progress-label">已作答 0 / {total} 題</span>
+      <span class="accuracy-label" id="accuracy-label"></span>
       <span class="progress-pct" id="progress-pct">0%</span>
     </div>
     <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="{total}" aria-valuenow="0" id="progress-track">
@@ -571,6 +575,16 @@ function updateProgress() {{
 
   document.getElementById('progress-label').textContent =
     `已作答 ${{count}} / ${{TOTAL}} 題`;
+  const accEl = document.getElementById('accuracy-label');
+  if (accEl) {{
+    if (count > 0) {{
+      const correctCount = count - wrongSet.size;
+      const accPct = Math.round(correctCount / count * 100);
+      accEl.textContent = `✓ 正確率 ${{accPct}}%`;
+    }} else {{
+      accEl.textContent = '';
+    }}
+  }}
   const pctEl = document.getElementById('progress-pct');
   pctEl.textContent = done ? '🎉 全部完成！' : pct + '%';
   pctEl.className = 'progress-pct' + (done ? ' done' : '');
