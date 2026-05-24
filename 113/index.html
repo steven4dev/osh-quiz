@@ -293,6 +293,51 @@ main {
 [data-theme="dark"] .result-row.ok.neg { background: #3e2f00; color: #ffb300; }
 .result-row.bad { background: var(--wrong-bg); color: var(--wrong); }
 .result-row.multi { background: #e8eaf6; color: #3949ab; }
+
+/* ── Multiple-select: checkboxes + submit ──────────── */
+.multi-options { display: flex; flex-direction: column; gap: 7px; }
+.multi-btn {
+  width: 100%; text-align: left;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  font-size: .93rem; cursor: pointer;
+  transition: background .15s, border-color .15s;
+  line-height: 1.5; min-height: 44px;
+  display: flex; align-items: center; gap: 8px;
+  position: relative;
+}
+.multi-btn::before {
+  content: '';
+  width: 18px; height: 18px; flex-shrink: 0;
+  border-radius: 4px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  transition: background .15s, border-color .15s;
+}
+.multi-btn.selected { border-color: var(--primary); background: var(--tag-bg); }
+.multi-btn.selected::before { background: var(--primary); border-color: var(--primary); box-shadow: inset 0 0 0 3px #fff; }
+.multi-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--tag-bg); }
+.multi-btn:disabled { cursor: default; }
+.multi-btn.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.multi-btn.correct::before { background: var(--correct); border-color: var(--correct); box-shadow: inset 0 0 0 3px #fff; }
+.multi-btn.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+.multi-btn.wrong::before { background: var(--wrong); border-color: var(--wrong); box-shadow: inset 0 0 0 3px #fff; }
+.multi-btn.missed { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: 600; opacity: .7; }
+.multi-btn.missed::before { background: var(--correct); border-color: var(--correct); box-shadow: inset 0 0 0 3px #fff; }
+.multi-submit {
+  margin-top: 4px; padding: 9px 18px;
+  border-radius: 8px; border: none;
+  background: var(--primary); color: #fff;
+  font-size: .9rem; font-weight: 600; cursor: pointer;
+  transition: background .15s, opacity .15s;
+  align-self: flex-start;
+}
+.multi-submit:hover { opacity: .87; }
+.multi-submit:disabled { opacity: .4; cursor: default; }
+
 .retry-btn {
   margin-left: auto; padding: 4px 10px;
   background: var(--surface2); border: 1px solid var(--border);
@@ -406,22 +451,21 @@ const THEME_KEY    = 'osh113_theme';
 function isMultiple(q) {
   return Array.isArray(q.answer);
 }
-function isCorrectAnswer(q, chosen) {
-  if (isMultiple(q)) return q.answer.includes(chosen);
-  return chosen === q.answer;
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return [...a].sort((x,y)=>x-y).every((v,i) => v === [...b].sort((x,y)=>x-y)[i]);
 }
 
 // ── Load persisted state ──────────────────────────────────────────────────────
 let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
 
-// answered: Map<id, {chosen, correct}>
-// For multi-answer: chosen = the number clicked, correct = first answer
+// answered: Map<id, {chosen}>
+// chosen is a number (single) or sorted number[] (multi-select)
 const _savedAnswered = JSON.parse(localStorage.getItem(ANSWERED_KEY) || '{}');
 const answered = new Map(
   Object.entries(_savedAnswered).map(([k, chosen]) => {
-    const q = QUESTIONS.find(q => q.id === +k);
-    const correct = q ? (isMultiple(q) ? q.answer[0] : q.answer) : chosen;
-    return [+k, { chosen: +chosen, correct }];
+    return [+k, { chosen: Array.isArray(chosen) ? chosen : +chosen }];
   })
 );
 
@@ -497,21 +541,76 @@ function chTag(q) {
   return `<span class="${cls}">${short}${badge}</span>`;
 }
 
-// ── Render one card ───────────────────────────────────────────────────────────
-function renderCard(q) {
+// ── Render multiple-select card ───────────────────────────────────────────────
+function renderMultiCard(q) {
   const ans = answered.get(q.id);
   const wasWrong = wrongSet.has(q.id);
-  const multi = isMultiple(q);
-  const isNeg = !!q.isNegative;  // 反向題：正確答案為唯一錯誤選項
 
-  // Card border class
   let cardCls = 'card';
   if (ans) {
-    if (multi) {
-      cardCls += q.answer.includes(ans.chosen) ? ' answered-ok' : ' was-wrong';
-    } else {
-      cardCls += ans.chosen === q.answer ? ' answered-ok' : ' was-wrong';
+    cardCls += arraysEqual(ans.chosen, q.answer) ? ' answered-ok' : ' was-wrong';
+  } else if (wasWrong) {
+    cardCls += ' was-wrong';
+  }
+
+  const chosen = ans ? ans.chosen : [];
+  const optBtns = q.options.map((opt, i) => {
+    const num = i + 1;
+    let cls = 'multi-btn';
+    let disabled = '';
+    if (ans) {
+      disabled = 'disabled';
+      const inAns    = Array.isArray(ans.chosen) && ans.chosen.includes(num);
+      const inAnswer = q.answer.includes(num);
+      if (inAnswer && inAns)   cls += ' correct';
+      else if (!inAnswer && inAns) cls += ' wrong';
+      else if (inAnswer && !inAns) cls += ' missed';
+    } else if (Array.isArray(chosen) && chosen.includes(num)) {
+      cls += ' selected';
     }
+    return `<button class="${cls}" ${disabled} data-id="${q.id}" data-num="${num}">(${num}) ${opt}</button>`;
+  }).join('\n');
+
+  const submitDisabled = ans ? 'disabled' : '';
+  const submitBtn = `<button class="multi-submit" ${submitDisabled} data-id="${q.id}">確認答案</button>`;
+
+  let resultHtml = '';
+  if (ans) {
+    const ok = arraysEqual(ans.chosen, q.answer);
+    const letters = ['A','B','C','D'];
+    const correctLabels = q.answer.map(n => `(${letters[n-1]})`).join(' ');
+    if (ok) {
+      resultHtml = `<div class="result-row ok show">✅ 答對了！<button class="retry-btn" data-id="${q.id}">重試</button></div>`;
+    } else {
+      resultHtml = `<div class="result-row bad show">❌ 答錯！正確選項：${correctLabels}<button class="retry-btn" data-id="${q.id}">重試</button></div>`;
+    }
+  }
+
+  return `<div class="${cardCls}" id="card-${q.id}">
+  <div class="card-header">
+    <span class="q-num">Q${q.id}</span>
+    ${chTag(q)}
+  </div>
+  <div class="q-text">${q.text}</div>
+  <div class="multi-options">
+${optBtns}
+${submitBtn}
+  </div>
+  ${resultHtml}
+</div>`;
+}
+
+// ── Render single-choice card ──────────────────────────────────────────────────
+function renderCard(q) {
+  if (isMultiple(q)) return renderMultiCard(q);
+
+  const ans = answered.get(q.id);
+  const wasWrong = wrongSet.has(q.id);
+  const isNeg = !!q.isNegative;
+
+  let cardCls = 'card';
+  if (ans) {
+    cardCls += ans.chosen === q.answer ? ' answered-ok' : ' was-wrong';
   } else if (wasWrong) {
     cardCls += ' was-wrong';
   }
@@ -522,30 +621,17 @@ function renderCard(q) {
     let disabled = '';
     if (ans) {
       disabled = 'disabled';
-      if (multi) {
-        if (q.answer.includes(num)) cls += ' correct';
-        else if (num === ans.chosen) cls += ' wrong';
-      } else {
-        if (num === q.answer) cls += isNeg ? ' correct-neg' : ' correct';
-        else if (num === ans.chosen) cls += ' wrong';
-      }
+      if (num === q.answer) cls += isNeg ? ' correct-neg' : ' correct';
+      else if (num === ans.chosen) cls += ' wrong';
     }
     return `<button class="${cls}" ${disabled} data-id="${q.id}" data-num="${num}">(${num}) ${opt}</button>`;
   }).join('\n');
 
   let resultHtml = '';
   if (ans) {
-    if (multi) {
-      const letters = ['A','B','C','D'];
-      const correctLabels = q.answer.map(n => `(${letters[n-1]})`).join(' ');
-      const hitCorrect = q.answer.includes(ans.chosen);
-      const cls2 = hitCorrect ? 'ok' : 'bad';
-      resultHtml = `<div class="result-row ${cls2} show">☑ 複選題 — 正確選項：${correctLabels}<button class="retry-btn" data-id="${q.id}">重試</button></div>`;
-    } else if (ans.chosen === q.answer) {
+    if (ans.chosen === q.answer) {
       const okCls = isNeg ? 'result-row ok neg show' : 'result-row ok show';
-      const okMsg = isNeg
-        ? '⚠️ 答對！（此選項為題目中唯一錯誤的）'
-        : '✅ 答對了！';
+      const okMsg = isNeg ? '⚠️ 答對！（此選項為題目中唯一錯誤的）' : '✅ 答對了！';
       resultHtml = `<div class="${okCls}">${okMsg}<button class="retry-btn" data-id="${q.id}">重試</button></div>`;
     } else {
       const negHint = isNeg ? '（反向題，選最不正確的）' : '';
@@ -553,7 +639,7 @@ function renderCard(q) {
     }
   }
 
-  const numBadge = q.isNumeric && !multi ? ' 🔢' : '';
+  const numBadge = q.isNumeric ? ' 🔢' : '';
 
   return `<div class="${cardCls}" id="card-${q.id}">
   <div class="card-header">
@@ -643,18 +729,19 @@ function render() {
 
 // ── Event delegation ──────────────────────────────────────────────────────────
 document.getElementById('main-grid').addEventListener('click', e => {
+
+  // ── Single-choice option ──
   const optBtn = e.target.closest('.opt-btn');
   if (optBtn && !optBtn.disabled) {
     const id = +optBtn.dataset.id;
     const chosen = +optBtn.dataset.num;
     const q = QUESTIONS.find(q => q.id === id);
 
-    answered.set(id, { chosen, correct: isMultiple(q) ? q.answer[0] : q.answer });
+    answered.set(id, { chosen });
     saveAnswered();
     updateProgress();
 
-    // For wrong tracking: wrong if chosen is not in correct answers
-    if (isCorrectAnswer(q, chosen)) unmarkWrong(id);
+    if (chosen === q.answer) unmarkWrong(id);
     else markWrong(id);
 
     const card = document.getElementById('card-' + id);
@@ -664,6 +751,40 @@ document.getElementById('main-grid').addEventListener('click', e => {
     return;
   }
 
+  // ── Multiple-select: toggle button ──
+  const multiBtn = e.target.closest('.multi-btn');
+  if (multiBtn && !multiBtn.disabled) {
+    multiBtn.classList.toggle('selected');
+    return;
+  }
+
+  // ── Multiple-select: confirm submit ──
+  const submitBtn = e.target.closest('.multi-submit');
+  if (submitBtn && !submitBtn.disabled) {
+    const id = +submitBtn.dataset.id;
+    const card = document.getElementById('card-' + id);
+    const q = QUESTIONS.find(q => q.id === id);
+
+    const chosen = [];
+    card.querySelectorAll('.multi-btn.selected').forEach(btn => {
+      chosen.push(+btn.dataset.num);
+    });
+    chosen.sort((a, b) => a - b);
+
+    answered.set(id, { chosen });
+    saveAnswered();
+    updateProgress();
+
+    if (arraysEqual(chosen, q.answer)) unmarkWrong(id);
+    else markWrong(id);
+
+    const tmp = document.createElement('div');
+    tmp.innerHTML = renderCard(q);
+    card.replaceWith(tmp.firstElementChild);
+    return;
+  }
+
+  // ── Retry ──
   const retryBtn = e.target.closest('.retry-btn');
   if (retryBtn) {
     const id = +retryBtn.dataset.id;
@@ -760,7 +881,7 @@ document.getElementById('import-file').addEventListener('change', e => {
       for (const [k, chosen] of Object.entries(data.answered)) {
         const id = +k;
         const q = QUESTIONS.find(q => q.id === id);
-        if (q) answered.set(id, {chosen: +chosen, correct: isMultiple(q) ? q.answer[0] : q.answer});
+        if (q) answered.set(id, {chosen: Array.isArray(chosen) ? chosen : +chosen});
       }
       saveAnswered();
 
