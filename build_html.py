@@ -42,7 +42,7 @@ def make_option(item):
     if item == "未完成":
         return '<option value="未完成" id="opt-incomplete">📝 未完成</option>\n'
     if item == "⭐ 我的錯題本":
-        return f'<option value="錯題本">⭐ 我的錯題本</option>\n'
+        return f'<option value="錯題本" id="opt-wrong">⭐ 我的錯題本</option>\n'
     if item == "🔢 金庫密碼":
         return f'<option value="金庫密碼">🔢 金庫密碼（{numeric_count} 題）</option>\n'
     cnt = law_counts.get(item, 0)
@@ -450,6 +450,7 @@ const answered = new Map(
 // ── Persist helpers ───────────────────────────────────────────────────────────
 function saveWrong() {{
   localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
+  updateWrongLabel();
 }}
 function saveAnswered() {{
   const obj = {{}};
@@ -551,7 +552,12 @@ function renderCard(q) {{
 </div>`;
 }}
 
-// ── Update "未完成" option label ──────────────────────────────────────────────
+// ── Update "錯題本" / "未完成" option labels ─────────────────────────────────
+function updateWrongLabel() {{
+  const el = document.getElementById('opt-wrong');
+  if (el) el.textContent = `⭐ 我的錯題本（${{wrongSet.size}} 題）`;
+}}
+
 function updateIncompleteLabel() {{
   const cnt = QUESTIONS.filter(q => !answered.has(q.id)).length;
   const el = document.getElementById('opt-incomplete');
@@ -784,6 +790,7 @@ document.addEventListener('keydown', e => {{
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 updateProgress();
+updateWrongLabel();
 render();
 </script>
 </body>

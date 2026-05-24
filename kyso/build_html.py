@@ -43,7 +43,7 @@ def make_options_html():
     # Special filters
     lines.append(f'<option value="全部">全部（{total} 題）</option>\n')
     lines.append('<option value="未完成" id="opt-incomplete">📝 未完成</option>\n')
-    lines.append('<option value="錯題本">⭐ 我的錯題本</option>\n')
+    lines.append('<option value="錯題本" id="opt-wrong">⭐ 我的錯題本</option>\n')
     lines.append(f'<option value="金庫密碼">🔢 金庫密碼（{numeric_count} 題）</option>\n')
     lines.append(f'<option value="是非題">✅ 是非題（{tf_count} 題）</option>\n')
     lines.append(f'<option value="複選題">☑ 複選題（{multiple_count} 題）</option>\n')
@@ -555,6 +555,7 @@ const answered = new Map(
 // ── Persist helpers ───────────────────────────────────────────────────────────
 function saveWrong() {{
   localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
+  updateWrongLabel();
 }}
 function saveAnswered() {{
   const obj = {{}};
@@ -779,6 +780,11 @@ function renderCard(q) {{
 }}
 
 // ── Update "未完成" option label ──────────────────────────────────────────────
+function updateWrongLabel() {{
+  const el = document.getElementById('opt-wrong');
+  if (el) el.textContent = `⭐ 我的錯題本（${{wrongSet.size}} 題）`;
+}}
+
 function updateIncompleteLabel() {{
   const cnt = QUESTIONS.filter(q => !answered.has(q.id)).length;
   const el = document.getElementById('opt-incomplete');
@@ -1048,6 +1054,7 @@ document.addEventListener('keydown', e => {{
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 updateProgress();
+updateWrongLabel();
 render();
 </script>
 </body>
