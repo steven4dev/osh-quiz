@@ -2772,7 +2772,7 @@
     "chapter": "第六章 承攬管理",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 186,
@@ -3162,7 +3162,7 @@
     "chapter": "第七章 採購及變更管理",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 212,
@@ -3327,7 +3327,7 @@
     "chapter": "第八章 緊急應變管理",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 223,
@@ -4879,7 +4879,7 @@
     "chapter": "第十二章 感電危害預防管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 326,
@@ -4969,7 +4969,7 @@
     "chapter": "第十三章 倒塌崩塌危害預防管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 332,

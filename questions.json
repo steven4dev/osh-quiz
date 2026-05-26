@@ -151,7 +151,7 @@
     "answer": 4,
     "law": "職業安全衛生設施規則",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 12,
@@ -165,7 +165,7 @@
     "answer": 1,
     "law": "職業安全衛生設施規則",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 13,
@@ -1467,7 +1467,7 @@
     "answer": 1,
     "law": "營造安全衛生設施標準",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 106,
@@ -2669,7 +2669,7 @@
     "answer": 3,
     "law": "職業安全衛生法",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 192,
