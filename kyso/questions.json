@@ -252,7 +252,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 16,
@@ -558,7 +558,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 34,
@@ -1051,7 +1051,7 @@
     "section": "",
     "chapter": "第6章 缺氧症預防規則",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 63,
@@ -1068,7 +1068,7 @@
     "section": "",
     "chapter": "第4章 缺氧事故處理與急救",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 64,
@@ -1289,7 +1289,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 77,
@@ -1340,7 +1340,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 80,
@@ -1510,7 +1510,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 90,
@@ -1799,7 +1799,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 107,
@@ -3176,7 +3176,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 188,
@@ -3227,7 +3227,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 191,
@@ -3283,7 +3283,7 @@
   {
     "id": 194,
     "type": "single",
-    "text": "粉塵會戕害身體哪些部位？",
+    "text": "粉塵會危害身體哪些部位？",
     "options": [
       "肝臟",
       "肺部",
@@ -3453,7 +3453,7 @@
   {
     "id": 204,
     "type": "single",
-    "text": "有機溶劑蒸氣會戕害身體何種功能？",
+    "text": "有機溶劑蒸氣會危害身體何種功能？",
     "options": [
       "肝臟",
       "神經系統",
@@ -3482,7 +3482,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 206,
@@ -3584,7 +3584,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 213,
@@ -4264,7 +4264,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 253,
@@ -4439,7 +4439,7 @@
   {
     "id": 263,
     "type": "single",
-    "text": "依職業安全衛生法施行細則規定，事業單位之職業安穗生管理由何人負執行之責?",
+    "text": "依職業安全衛生法施行細則規定，事業單位之職業安全衛生管理由何人負執行之責?",
     "options": [
       "職業安全衛生管理人員",
       "職業安全衛生管理單位業務主管",
@@ -4485,7 +4485,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 266,
@@ -5029,7 +5029,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 298,
@@ -5131,7 +5131,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 304,
@@ -5743,7 +5743,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 340,
@@ -5862,7 +5862,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 347,
@@ -5879,7 +5879,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 348,
@@ -6304,7 +6304,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 373,
@@ -7205,7 +7205,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 426,
@@ -7953,7 +7953,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 470,
@@ -8123,7 +8123,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 480,
@@ -8259,7 +8259,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 488,
@@ -8276,7 +8276,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 489,
@@ -8293,7 +8293,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 490,
@@ -8769,7 +8769,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 518,
@@ -8786,7 +8786,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 519,
@@ -9024,7 +9024,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 533,
@@ -9160,7 +9160,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 541,
@@ -9177,7 +9177,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 542,
@@ -9228,7 +9228,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 545,
@@ -9653,7 +9653,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 570,
@@ -9738,7 +9738,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 575,
@@ -9823,7 +9823,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 580,
@@ -9840,7 +9840,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 581,
@@ -9857,7 +9857,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 582,
@@ -9925,7 +9925,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 586,
@@ -10622,7 +10622,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 627,
@@ -12319,7 +12319,7 @@
     "section": "工作項目02：職業安全衛生計畫與管理",
     "chapter": "工作項目02：職業安全衛生計畫與管理",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 718,
@@ -12336,7 +12336,7 @@
     "section": "工作項目02：職業安全衛生計畫與管理",
     "chapter": "工作項目02：職業安全衛生計畫與管理",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 719,
@@ -12795,7 +12795,7 @@
     "section": "工作項目02：職業安全衛生計畫與管理",
     "chapter": "工作項目02：職業安全衛生計畫與管理",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 746,
@@ -13135,7 +13135,7 @@
     "section": "工作項目02：職業安全衛生計畫與管理",
     "chapter": "工作項目02：職業安全衛生計畫與管理",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 766,
@@ -13594,7 +13594,7 @@
     "section": "工作項目02：職業安全衛生計畫與管理",
     "chapter": "工作項目02：職業安全衛生計畫與管理",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 793,
@@ -15318,7 +15318,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 892,
@@ -15624,7 +15624,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 910,
@@ -15692,7 +15692,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 914,
@@ -16933,7 +16933,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 987,
@@ -17069,7 +17069,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 995,
@@ -18378,7 +18378,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1072,
@@ -19245,7 +19245,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1123,
@@ -20078,7 +20078,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1172,
@@ -22823,7 +22823,7 @@
     "section": "",
     "chapter": "第3章 缺氧危險作業安全衛生管理與執行",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1324,
@@ -22959,7 +22959,7 @@
     "section": "",
     "chapter": "第3章 缺氧危險作業安全衛生管理與執行",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1332,
@@ -22976,7 +22976,7 @@
     "section": "",
     "chapter": "第3章 缺氧危險作業安全衛生管理與執行",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1333,
@@ -23027,7 +23027,7 @@
     "section": "",
     "chapter": "第3章 缺氧危險作業安全衛生管理與執行",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1336,
@@ -23945,7 +23945,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1391,
@@ -23996,7 +23996,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1394,
@@ -24047,7 +24047,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1397,
@@ -24676,7 +24676,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1435,
@@ -24948,7 +24948,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1451,
@@ -25169,7 +25169,7 @@
     "section": "",
     "chapter": "第3章 缺氧危險作業安全衛生管理與執行",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1464,
@@ -25220,7 +25220,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1467,
@@ -25237,7 +25237,7 @@
     "section": "",
     "chapter": "第6章 缺氧症預防規則",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1468,
@@ -25271,7 +25271,7 @@
     "section": "",
     "chapter": "第3章 缺氧危險作業安全衛生管理與執行",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1470,
@@ -25322,7 +25322,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1473,
@@ -25373,7 +25373,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1476,
@@ -25900,7 +25900,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1507,
@@ -25917,7 +25917,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1508,
@@ -27788,7 +27788,7 @@
     "section": "選擇題一",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1623,
@@ -28962,7 +28962,7 @@
     "section": "選擇題三",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1700,
