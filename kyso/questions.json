@@ -5250,7 +5250,7 @@
     "section": "",
     "chapter": "第4章 缺氧事故處理與急救",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 311,
@@ -18616,7 +18616,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1086,
@@ -20146,7 +20146,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1176,
