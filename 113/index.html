@@ -101,6 +101,12 @@ header h1 small {
   font-size: .72rem; font-weight: 400; opacity: .8;
   white-space: nowrap;
 }
+#clock {
+  font-size: .85rem; font-weight: 600; color: rgba(255,255,255,.9);
+  background: rgba(255,255,255,.15); border-radius: 8px;
+  padding: 6px 10px; letter-spacing: .04em; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
 #theme-btn {
   background: rgba(255,255,255,.2); border: none;
   border-radius: 8px; padding: 6px 10px;
@@ -382,6 +388,7 @@ main {
   </nav>
   <header>
     <h1>營造業丙種職業安全衛生<br>業務主管題庫<small>【113年版 (甲、乙、丙種)精選(471 題)】</small></h1>
+    <span id="clock" aria-live="off"></span>
     <button id="theme-btn" title="切換深色模式" aria-label="切換深色模式">🌙</button>
   </header>
 
@@ -894,6 +901,20 @@ document.getElementById('import-file').addEventListener('change', e => {
   };
   reader.readAsText(file);
 });
+
+// ── Clock ─────────────────────────────────────────────────────────────────────
+(function() {
+  const clockEl = document.getElementById('clock');
+  function tick() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+    clockEl.textContent = `${h}:${m}:${s}`;
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
 
 // ── Dark mode ─────────────────────────────────────────────────────────────────
 const themeBtn = document.getElementById('theme-btn');
