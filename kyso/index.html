@@ -199,6 +199,30 @@ header h1 small {
 }
 #export-btn:hover { border-color: #0f7a42; color: #0f7a42; }
 #import-btn:hover { border-color: var(--primary); color: var(--primary); }
+#show-answers-btn {
+  font-size: .8rem; padding: 6px 10px;
+  background: var(--surface2); color: var(--text2);
+  border: 1.5px solid var(--border); border-radius: 8px;
+  cursor: pointer; transition: all .2s;
+}
+#show-answers-btn:hover { border-color: var(--correct); color: var(--correct); }
+#show-answers-btn.active {
+  background: var(--correct-bg); color: var(--correct); border-color: var(--correct);
+}
+.show-answers .opt-btn[data-answer]:not([disabled]),
+.show-answers .multi-btn[data-answer]:not([disabled]),
+.show-answers .tf-btn[data-answer]:not([disabled]) {
+  background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: 600;
+}
+.show-answers .opt-btn[data-neg-answer]:not([disabled]) {
+  background: #fffde7; border-color: #f9a825; color: #5d4037;
+  font-weight: 600; text-decoration: line-through;
+  text-decoration-color: #e65100; text-decoration-thickness: 2px;
+}
+[data-theme="dark"] .show-answers .opt-btn[data-neg-answer]:not([disabled]) {
+  background: #3e2f00; border-color: #f9a825; color: #ffe082;
+  text-decoration-color: #ffb300;
+}
 
 /* ── Main grid ────────────────────────────────────── */
 main {
@@ -490,6 +514,7 @@ main {
     <button id="export-btn" title="匯出作答紀錄（JSON）">⬇ 匯出</button>
     <button id="import-btn" title="匯入作答紀錄（JSON）">⬆ 匯入</button>
     <input id="import-file" type="file" accept=".json" style="display:none">
+    <button id="show-answers-btn" title="顯示所有正確答案（不計入統計）">👁 顯示答案</button>
   </div>
 </div>
 
@@ -622,7 +647,8 @@ function renderMultiCard(q) {
     } else if (chosen.includes(num)) {
       cls += ' selected';
     }
-    return `<button class="${cls}" ${disabled} data-id="${q.id}" data-num="${num}">${opt}</button>`;
+    const ansAttr = q.answer.includes(num) ? ' data-answer' : '';
+    return `<button class="${cls}" ${disabled} data-id="${q.id}" data-num="${num}"${ansAttr}>${opt}</button>`;
   }).join('\n');
 
   const submitDisabled = ans ? 'disabled' : '';
@@ -676,7 +702,8 @@ function renderTFCard(q) {
       if (o.num === q.answer) cls += ' correct';
       else if (o.num === ans.chosen) cls += ' wrong';
     }
-    return `<button class="${cls}" ${disabled} data-id="${q.id}" data-num="${o.num}">${o.label}</button>`;
+    const ansAttr = o.num === q.answer ? ' data-answer' : '';
+    return `<button class="${cls}" ${disabled} data-id="${q.id}" data-num="${o.num}"${ansAttr}>${o.label}</button>`;
   }).join('\n');
 
   let resultHtml = '';
@@ -725,7 +752,8 @@ function renderCard(q) {
       if (num === q.answer) cls += isNeg ? ' correct-neg' : ' correct';
       else if (num === ans.chosen) cls += ' wrong';
     }
-    return `<button class="${cls}" ${disabled} data-id="${q.id}" data-num="${num}">(${num}) ${opt}</button>`;
+    const ansAttr = num === q.answer ? (isNeg ? ' data-neg-answer' : ' data-answer') : '';
+    return `<button class="${cls}" ${disabled} data-id="${q.id}" data-num="${num}"${ansAttr}>(${num}) ${opt}</button>`;
   }).join('\n');
 
   let resultHtml = '';
@@ -997,6 +1025,16 @@ document.getElementById('import-file').addEventListener('change', e => {
   };
   reader.readAsText(file);
 });
+
+// ── Show-answers toggle ───────────────────────────────────────────────────────
+(function() {
+  const btn = document.getElementById('show-answers-btn');
+  btn.addEventListener('click', () => {
+    const on = document.body.classList.toggle('show-answers');
+    btn.classList.toggle('active', on);
+    btn.textContent = on ? '🙈 隱藏答案' : '👁 顯示答案';
+  });
+})();
 
 // ── Clock ─────────────────────────────────────────────────────────────────────
 (function() {
