@@ -969,17 +969,24 @@ themeBtn.addEventListener('click', () => {
   applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
 });
 
-// ── Fullscreen (F key) ───────────────────────────────────────────────────────
+// ── Fullscreen (F key / middle click / clock click) ──────────────────────────
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen().catch(() => {});
+  }
+}
 document.addEventListener('keydown', e => {
   if ((e.key === 'f' || e.key === 'F') &&
       document.activeElement !== document.getElementById('search-input')) {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {});
-    } else {
-      document.exitFullscreen().catch(() => {});
-    }
+    toggleFullscreen();
   }
 });
+document.addEventListener('auxclick', e => {
+  if (e.button === 1) { e.preventDefault(); toggleFullscreen(); }
+});
+document.getElementById('clock').addEventListener('click', toggleFullscreen);
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 updateProgress();
