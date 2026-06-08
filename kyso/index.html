@@ -101,6 +101,11 @@ header h1 small {
   font-size: .72rem; font-weight: 400; opacity: .8;
   white-space: nowrap;
 }
+#eta {
+  font-size: .75rem; font-weight: 500; color: rgba(255,255,255,.82);
+  background: rgba(255,255,255,.11); border-radius: 8px;
+  padding: 6px 10px; white-space: nowrap; letter-spacing: .02em;
+}
 #clock {
   font-size: .85rem; font-weight: 600; color: rgba(255,255,255,.9);
   background: rgba(255,255,255,.15); border-radius: 8px;
@@ -464,6 +469,7 @@ main {
   </nav>
   <header>
     <h1>缺氧作業主管安全衛生教育訓練<br>題庫練習<small>【綜合題庫（1692 題）】</small></h1>
+    <span id="eta"></span>
     <span id="clock" aria-live="off"></span>
     <button id="theme-btn" title="切換深色模式" aria-label="切換深色模式">🌙</button>
   </header>
@@ -1052,15 +1058,32 @@ document.getElementById('import-file').addEventListener('change', e => {
   });
 })();
 
-// ── Clock ─────────────────────────────────────────────────────────────────────
+// ── Clock + ETA ───────────────────────────────────────────────────────────────
 (function() {
   const clockEl = document.getElementById('clock');
+  const etaEl   = document.getElementById('eta');
   function tick() {
     const now = new Date();
     const h = String(now.getHours()).padStart(2,'0');
     const m = String(now.getMinutes()).padStart(2,'0');
     const s = String(now.getSeconds()).padStart(2,'0');
     clockEl.textContent = `${h}:${m}:${s}`;
+
+    const remaining = TOTAL - answered.size;
+    if (remaining <= 0) {
+      etaEl.textContent = '';
+    } else {
+      const totalMin = Math.ceil(remaining / 40 * 60);
+      const rh  = Math.floor(totalMin / 60);
+      const rm  = totalMin % 60;
+      const eta = new Date(now.getTime() + totalMin * 60000);
+      const eh  = String(eta.getHours()).padStart(2,'0');
+      const em  = String(eta.getMinutes()).padStart(2,'0');
+      const left = rh > 0
+        ? `${rh}h${String(rm).padStart(2,'0')}m`
+        : `${rm}m`;
+      etaEl.textContent = `剩 ${left} → ${eh}:${em}`;
+    }
   }
   tick();
   setInterval(tick, 1000);
