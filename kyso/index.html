@@ -528,6 +528,22 @@ const QUESTIONS = [{"id":1,"type":"single","text":"「受雇從事工作獲致�
 const TOTAL = 1692;
 const MULTI_COUNT = 105;
 
+// ── 反向題補充偵測 ─────────────────────────────────────────────────────────────
+;(function(){
+  const NEG = ['未包括','不包含下列何者','不適當','非為','較不會影響','不包含','不是','無法','不可能','不可','不會'];
+  QUESTIONS.forEach(q => {
+    if (!q.isNegative && NEG.some(p => q.text.includes(p))) q.isNegative = true;
+  });
+  // 清除選項末尾的題庫來源標籤
+  QUESTIONS.forEach(q => {
+    if (Array.isArray(q.options)) {
+      q.options = q.options.map(o =>
+        typeof o === 'string' ? o.replace(/22200職業安全衛生管理乙級工作項目\d+[：:].*/, '').trimEnd() : o
+      );
+    }
+  });
+})();
+
 // ── Persistence keys (kyso site, separate from other sites) ──────────────────
 const WRONG_KEY    = 'kyso_wrong_v1';
 const ANSWERED_KEY = 'kyso_answered_v1';
