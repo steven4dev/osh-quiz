@@ -2445,7 +2445,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 145,
@@ -2921,7 +2921,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 173,
@@ -3499,7 +3499,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 207,
@@ -3516,7 +3516,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 208,
@@ -3856,7 +3856,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 229,
@@ -3907,7 +3907,7 @@
     "section": "",
     "chapter": "第2章 缺氧危險場所危害預防及安全衛生防護具",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 232,
@@ -4383,7 +4383,7 @@
     "section": "",
     "chapter": "第5章 缺氧危險場所之環境測定",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 260,
@@ -4400,7 +4400,7 @@
     "section": "",
     "chapter": "第5章 缺氧危險場所之環境測定",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 261,
@@ -5828,7 +5828,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 345,
@@ -9058,7 +9058,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 535,
@@ -9126,7 +9126,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 539,
@@ -9619,7 +9619,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 568,
@@ -9636,7 +9636,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 569,
@@ -9670,7 +9670,7 @@
     "section": "工作項目01：職業安全衛生相關法規",
     "chapter": "工作項目01：職業安全衛生相關法規",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 571,
@@ -12121,7 +12121,7 @@
       "高度在2公尺以上未滿5公尺者，至少有20分鐘休息",
       "高度在5公尺以上未滿20公尺者，至少有25分鐘休息",
       "高度在20公尺以上者，至少有35分鐘休息",
-      "高度在30公尺以上者，至少有40分鐘休息。22200職業安全衛生管理乙級工作項目02：職業安全衛生計畫及管理"
+      "高度在30公尺以上者，至少有40分鐘休息。"
     ],
     "answer": [
       1,
@@ -13305,7 +13305,7 @@
     "section": "工作項目02：職業安全衛生計畫與管理",
     "chapter": "工作項目02：職業安全衛生計畫與管理",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 776,
@@ -13356,7 +13356,7 @@
     "section": "工作項目02：職業安全衛生計畫與管理",
     "chapter": "工作項目02：職業安全衛生計畫與管理",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 779,
@@ -13543,7 +13543,7 @@
     "section": "工作項目02：職業安全衛生計畫與管理",
     "chapter": "工作項目02：職業安全衛生計畫與管理",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 790,
@@ -13845,7 +13845,7 @@
       "安全觀察的參考",
       "違規懲處參考",
       "事故調查參考",
-      "防範工作場所危害的發生。22200職業安全衛生管理乙級工作項目03：專業課程"
+      "防範工作場所危害的發生。"
     ],
     "answer": [
       1,
@@ -13975,7 +13975,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 813,
@@ -14094,7 +14094,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 820,
@@ -14196,7 +14196,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 826,
@@ -14553,7 +14553,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 847,
@@ -14604,7 +14604,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 850,
@@ -15403,7 +15403,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 897,
@@ -15709,7 +15709,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 915,
@@ -15743,7 +15743,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 917,
@@ -15760,7 +15760,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 918,
@@ -15794,7 +15794,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 920,
@@ -16236,7 +16236,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 946,
@@ -17052,7 +17052,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 994,
@@ -17120,7 +17120,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 998,
@@ -18327,7 +18327,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1069,
@@ -18514,7 +18514,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1080,
@@ -19160,7 +19160,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1118,
@@ -19653,7 +19653,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1147,
@@ -20027,7 +20027,7 @@
     "section": "工作項目03：專業科目",
     "chapter": "工作項目03：專業科目",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1169,
@@ -22857,7 +22857,7 @@
     "section": "",
     "chapter": "第4章 缺氧事故處理與急救",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1326,
@@ -22925,7 +22925,7 @@
     "section": "",
     "chapter": "第4章 缺氧事故處理與急救",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1330,
@@ -23486,7 +23486,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1364,
@@ -23707,7 +23707,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1377,
@@ -24064,7 +24064,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1398,
@@ -24081,7 +24081,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1399,
@@ -24200,7 +24200,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1406,
@@ -24897,7 +24897,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1448,
@@ -25628,7 +25628,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1491,
@@ -25645,7 +25645,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1492,
@@ -25662,7 +25662,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1493,
@@ -25679,7 +25679,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1494,
@@ -25713,7 +25713,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1496,
@@ -25730,7 +25730,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1497,
@@ -25798,7 +25798,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1501,
@@ -26240,7 +26240,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1527,
@@ -26274,7 +26274,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1529,
@@ -26342,7 +26342,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1533,
@@ -26529,7 +26529,7 @@
     "section": "",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1544,
@@ -27560,7 +27560,7 @@
     "section": "是非題一",
     "chapter": "第1章 缺氧危險作業及局限空間作業相關法規概要",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1608,
@@ -28928,7 +28928,7 @@
     "section": "選擇題三",
     "chapter": "第5章 缺氧危險場所之環境測定",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 1698,

@@ -164,6 +164,17 @@ header h1 small {{
   transition: background .2s;
 }}
 #theme-btn:hover {{ background: rgba(255,255,255,.35); }}
+#eta {{
+  font-size: 1.1rem; font-weight: 500; color: rgba(255,255,255,.82);
+  background: rgba(255,255,255,.11); border-radius: 8px;
+  padding: 6px 10px; white-space: nowrap; letter-spacing: .02em;
+}}
+#clock {{
+  font-size: 1.1rem; font-weight: 600; color: rgba(255,255,255,.9);
+  background: rgba(255,255,255,.15); border-radius: 8px;
+  padding: 6px 10px; letter-spacing: .04em; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}}
 
 /* ── Progress bar ─────────────────────────────────── */
 .progress-section {{
@@ -246,6 +257,31 @@ header h1 small {{
 }}
 #export-btn:hover {{ border-color: #0f7a42; color: #0f7a42; }}
 #import-btn:hover {{ border-color: var(--primary); color: var(--primary); }}
+#show-answers-btn {{
+  font-size: .8rem; padding: 6px 10px;
+  background: var(--surface2); color: var(--text2);
+  border: 1.5px solid var(--border); border-radius: 8px;
+  cursor: pointer; transition: all .2s;
+}}
+#show-answers-btn:hover {{ border-color: var(--correct); color: var(--correct); }}
+#show-answers-btn.active {{
+  background: var(--correct-bg); color: var(--correct); border-color: var(--correct);
+}}
+.show-answers .opt-btn[data-answer]:not([disabled]) {{
+  background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: 600;
+}}
+.show-answers .opt-btn[data-neg-answer]:not([disabled]) {{
+  background: #fffde7; border-color: #f9a825; color: #5d4037;
+  font-weight: 600; text-decoration: line-through;
+  text-decoration-color: #e65100; text-decoration-thickness: 2px;
+}}
+[data-theme="dark"] .show-answers .opt-btn[data-neg-answer]:not([disabled]) {{
+  background: #3e2f00; border-color: #f9a825; color: #ffe082;
+  text-decoration-color: #ffb300;
+}}
+.show-answers .multi-btn[data-answer]:not([disabled]) {{
+  background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: 600;
+}}
 
 /* ── Main grid ────────────────────────────────────── */
 main {{
@@ -438,6 +474,8 @@ main {{
   </nav>
   <header>
     <h1>營造業丙種職業安全衛生<br>業務主管題庫<small>【113年版 (甲、乙、丙種)精選(471 題)】</small></h1>
+    <span id="eta"></span>
+    <span id="clock" aria-live="off"></span>
     <button id="theme-btn" title="切換深色模式" aria-label="切換深色模式">🌙</button>
   </header>
 
@@ -462,6 +500,7 @@ main {{
     <button id="export-btn" title="匯出作答紀錄（JSON）">⬇ 匯出</button>
     <button id="import-btn" title="匯入作答紀錄（JSON）">⬆ 匯入</button>
     <input id="import-file" type="file" accept=".json" style="display:none">
+    <button id="show-answers-btn" title="顯示所有正確答案（不計入統計）">👁 顯示答案</button>
   </div>
 </div>
 
@@ -600,7 +639,8 @@ function renderMultiCard(q) {{
     }} else if (Array.isArray(chosen) && chosen.includes(num)) {{
       cls += ' selected';
     }}
-    return `<button class="${{cls}}" ${{disabled}} data-id="${{q.id}}" data-num="${{num}}">(${{num}}) ${{opt}}</button>`;
+    const ansAttr = q.answer.includes(num) ? ' data-answer' : '';
+    return `<button class="${{cls}}" ${{disabled}} data-id="${{q.id}}" data-num="${{num}}"${{ansAttr}}>(${{num}}) ${{opt}}</button>`;
   }}).join('\\n');
 
   const submitDisabled = ans ? 'disabled' : '';
@@ -656,7 +696,8 @@ function renderCard(q) {{
       if (num === q.answer) cls += isNeg ? ' correct-neg' : ' correct';
       else if (num === ans.chosen) cls += ' wrong';
     }}
-    return `<button class="${{cls}}" ${{disabled}} data-id="${{q.id}}" data-num="${{num}}">(${{num}}) ${{opt}}</button>`;
+    const ansAttr = num === q.answer ? (isNeg ? ' data-neg-answer' : ' data-answer') : '';
+    return `<button class="${{cls}}" ${{disabled}} data-id="${{q.id}}" data-num="${{num}}"${{ansAttr}}>(${{num}}) ${{opt}}</button>`;
   }}).join('\\n');
 
   let resultHtml = '';
@@ -927,6 +968,47 @@ document.getElementById('import-file').addEventListener('change', e => {{
   reader.readAsText(file);
 }});
 
+// ── Show-answers toggle ───────────────────────────────────────────────────────
+(function() {{
+  const btn = document.getElementById('show-answers-btn');
+  btn.addEventListener('click', () => {{
+    const on = document.body.classList.toggle('show-answers');
+    btn.classList.toggle('active', on);
+    btn.textContent = on ? '🙈 隱藏答案' : '👁 顯示答案';
+  }});
+}})();
+
+// ── Clock + ETA ───────────────────────────────────────────────────────────────
+(function() {{
+  const clockEl = document.getElementById('clock');
+  const etaEl   = document.getElementById('eta');
+  function tick() {{
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+    clockEl.textContent = `${{h}}:${{m}}:${{s}}`;
+
+    const remaining = TOTAL - answered.size;
+    if (remaining <= 0) {{
+      etaEl.textContent = '';
+    }} else {{
+      const totalMin = Math.ceil(remaining / 40 * 60);
+      const rh  = Math.floor(totalMin / 60);
+      const rm  = totalMin % 60;
+      const eta = new Date(now.getTime() + totalMin * 60000);
+      const eh  = String(eta.getHours()).padStart(2,'0');
+      const em  = String(eta.getMinutes()).padStart(2,'0');
+      const left = rh > 0
+        ? `${{rh}}h${{String(rm).padStart(2,'0')}}m`
+        : `${{rm}}m`;
+      etaEl.textContent = `剩 ${{left}} → ${{eh}}:${{em}}`;
+    }}
+  }}
+  tick();
+  setInterval(tick, 1000);
+}})();
+
 // ── Dark mode ─────────────────────────────────────────────────────────────────
 const themeBtn = document.getElementById('theme-btn');
 
@@ -944,17 +1026,24 @@ themeBtn.addEventListener('click', () => {{
   applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
 }});
 
-// ── Fullscreen (F key) ───────────────────────────────────────────────────────
+// ── Fullscreen (F key / middle click / clock click) ──────────────────────────
+function toggleFullscreen() {{
+  if (!document.fullscreenElement) {{
+    document.documentElement.requestFullscreen().catch(() => {{}});
+  }} else {{
+    document.exitFullscreen().catch(() => {{}});
+  }}
+}}
 document.addEventListener('keydown', e => {{
   if ((e.key === 'f' || e.key === 'F') &&
       document.activeElement !== document.getElementById('search-input')) {{
-    if (!document.fullscreenElement) {{
-      document.documentElement.requestFullscreen().catch(() => {{}});
-    }} else {{
-      document.exitFullscreen().catch(() => {{}});
-    }}
+    toggleFullscreen();
   }}
 }});
+document.addEventListener('auxclick', e => {{
+  if (e.button === 1) {{ e.preventDefault(); toggleFullscreen(); }}
+}});
+document.getElementById('clock').addEventListener('click', toggleFullscreen);
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 updateProgress();

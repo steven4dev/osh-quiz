@@ -1495,7 +1495,7 @@
     "answer": 3,
     "law": "職業安全衛生法",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 108,
@@ -2305,7 +2305,7 @@
     "answer": 2,
     "law": "職業安全衛生法",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 166,
@@ -3509,7 +3509,7 @@
     "answer": 3,
     "law": "營造安全衛生設施標準",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 252,
@@ -3565,7 +3565,7 @@
     "answer": 4,
     "law": "營造安全衛生設施標準",
     "isNumeric": true,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 256,
@@ -3789,7 +3789,7 @@
     "answer": 1,
     "law": "職業安全衛生法",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 272,
@@ -4643,7 +4643,7 @@
     "answer": 2,
     "law": "職業安全衛生設施規則",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 333,
@@ -4895,7 +4895,7 @@
     "answer": 2,
     "law": "職業安全衛生設施規則",
     "isNumeric": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 351,

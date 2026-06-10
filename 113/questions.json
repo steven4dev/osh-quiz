@@ -207,7 +207,7 @@
     "chapter": "第一章 企業經營風險與安全衛生",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 15,
@@ -3207,7 +3207,7 @@
     "chapter": "第八章 緊急應變管理",
     "isNumeric": true,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 215,
@@ -4126,7 +4126,7 @@
     "chapter": "第十章 機械安全管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 276,
@@ -4231,7 +4231,7 @@
     "chapter": "第十一章 火災爆炸危害預防管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 283,
@@ -5359,7 +5359,7 @@
     "chapter": "第十四章 化學性危害預防管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 358,
@@ -6454,7 +6454,7 @@
     "chapter": "第十六章 職場健康管理實務",
     "isNumeric": false,
     "isMultiple": false,
-    "isNegative": false
+    "isNegative": true
   },
   {
     "id": 431,
