@@ -407,51 +407,178 @@ main {
 #theme-btn { display: inline-flex; align-items: center; justify-content: center; }
 #theme-btn svg { display: block; width: 20px; height: 20px; }
 .site-ver { position: fixed; right: 6px; bottom: 4px; z-index: 50; padding: 0 4px; font-size: .64rem; line-height: 1.5; color: var(--text2); background: var(--bg); border-radius: 3px; opacity: .75; pointer-events: none; font-variant-numeric: tabular-nums; }
-@media (max-width: 600px) {
-  header { flex-wrap: wrap; row-gap: 6px; }
-  header h1 { flex: 1 1 calc(100% - 56px); min-width: 0; order: 0; }
-  #theme-btn { order: 1; margin-left: auto; }
-  #eta { order: 2; margin-right: auto; padding: 3px 8px; font-size: .9rem; }
-  #clock { order: 3; padding: 3px 8px; font-size: .9rem; }
-  .site-nav { overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
-  .site-nav::-webkit-scrollbar { display: none; }
-  .site-nav a, .site-nav .cur, .site-nav .sep { flex: none; }
+
+/* ── Compact header ─────────────────────────────── */
+.sticky-top {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-areas: "bar status actions" "tools tools tools" "track track track";
+  background: var(--bar); box-shadow: 0 2px 8px rgba(0,0,0,.12);
 }
+.bar { grid-area: bar; display: flex; align-items: center; gap: 2px; min-width: 0; min-height: 48px; padding: 2px 8px; color: #fff; }
+.actions { grid-area: actions; display: flex; align-items: center; gap: 2px; padding: 2px 8px 2px 0; color: #fff; }
+.icon-btn, #theme-btn {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 44px; height: 44px; padding: 0; color: inherit; background: none; border: 0;
+  border-radius: 8px; cursor: pointer; transition: background .15s; list-style: none;
+}
+.icon-btn:hover, #theme-btn:hover, .bank-menu summary:hover { background: rgba(255,255,255,.16); }
+.icon-btn svg, #theme-btn svg { display: block; width: 20px; height: 20px; }
+summary::-webkit-details-marker { display: none; }
+.menu { position: relative; min-width: 0; }
+.menu summary { cursor: pointer; list-style: none; }
+.bank-menu summary {
+  display: flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px;
+  border-radius: 8px; transition: background .15s;
+}
+.bank-menu h1 {
+  min-width: 0; margin: 0; font-size: 1.05rem; font-weight: 700; color: #fff;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.bank-menu summary svg { width: 16px; height: 16px; flex: none; transition: transform .15s; }
+.bank-menu[open] summary svg { transform: rotate(180deg); }
+.panel {
+  position: absolute; top: calc(100% + 4px); left: 0; z-index: 200; min-width: 200px; padding: 6px;
+  color: var(--text); background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.2);
+}
+.panel-right { left: auto; right: 0; }
+.panel a, .panel button {
+  display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; padding: 0 12px;
+  font: inherit; font-size: .92rem; color: var(--text); text-align: left; text-decoration: none;
+  background: none; border: 0; border-radius: 7px; cursor: pointer;
+}
+.panel a:hover, .panel button:hover { background: var(--surface2); }
+.panel a[aria-current] { font-weight: 700; color: var(--primary); background: var(--tag-bg); }
+.panel svg { width: 18px; height: 18px; flex: none; }
+.panel #export-btn, .panel #import-btn, .panel #reset-progress-btn, .panel #clear-wrong-btn {
+  padding: 0 12px; font-size: .92rem; color: var(--text); background: none; border: 0; border-radius: 7px;
+}
+.panel #reset-progress-btn, .panel #clear-wrong-btn { color: var(--wrong); }
+.panel #export-btn:hover, .panel #import-btn:hover, .panel #reset-progress-btn:hover, .panel #clear-wrong-btn:hover { background: var(--surface2); }
+.status {
+  grid-area: status; display: flex; align-items: center; gap: 12px; padding: 0 12px 0 8px;
+  font-size: .86rem; color: #fff; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.status .progress-label, .status .progress-pct, .status .accuracy-label { color: inherit; font-size: inherit; font-weight: 500; }
+.status .progress-pct { font-weight: 700; }
+#eta, #clock { padding: 0; font-size: inherit; color: inherit; background: none; border-radius: 0; letter-spacing: 0; }
+#eta { font-weight: 400; opacity: .85; }
+#clock { font-weight: 700; cursor: pointer; }
+.status-gap { width: 8px; }
+.controls {
+  grid-area: tools; display: flex; align-items: center; gap: 8px; flex-wrap: nowrap;
+  padding: 8px 12px; background: var(--surface); border-bottom: 0;
+}
+#law-select, #ch-select { flex: 0 1 300px; width: auto; min-width: 0; max-width: none; height: 40px; }
+.search-box { position: relative; flex: 1; min-width: 0; }
+#search-input {
+  flex: none; width: 100%; min-width: 0; height: 40px; padding-left: 36px; padding-right: 96px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a91a8' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: 10px center; background-size: 18px;
+}
+#stats { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); margin: 0; font-size: .8rem; color: var(--text2); white-space: nowrap; pointer-events: none; }
+#show-answers-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex: none;
+  height: 40px; padding: 0 12px; font-size: .86rem; white-space: nowrap;
+}
+#show-answers-btn svg { width: 18px; height: 18px; }
+.sticky-top > .progress-track {
+  grid-area: track; height: 4px; margin: 0; background: var(--progress-track); border-radius: 0; overflow: hidden;
+}
+.sticky-top > .progress-track .progress-fill { height: 100%; border-radius: 0; }
+/* Tab on the lower right of the tools block; hides the filter and search row. */
+#tools-toggle {
+  position: absolute; right: 12px; bottom: -24px; z-index: 90;
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 24px; padding: 0; color: var(--text2);
+  background: var(--surface); border: 1px solid var(--border); border-top: 0;
+  border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0,0,0,.1); cursor: pointer;
+}
+#tools-toggle::after { content: ""; position: absolute; left: 0; right: 0; top: 0; bottom: -20px; }
+#tools-toggle:hover { color: var(--text); background: var(--surface2); }
+#tools-toggle svg { width: 16px; height: 16px; transform: rotate(180deg); transition: transform .15s; }
+.tools-collapsed #tools-toggle svg { transform: none; }
+.tools-collapsed .controls { display: none; }
+.tools-collapsed.tools-active #tools-toggle::before {
+  content: ""; position: absolute; top: 4px; right: 6px; width: 7px; height: 7px;
+  background: var(--primary); border-radius: 50%;
+}
+[data-theme="dark"] .ch-tag.numeric { background: var(--tag-bg); color: #ffb74d; }
+a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visible, input:focus-visible {
+  outline: 3px solid #4d9de0; outline-offset: 1px;
+}
+@media (max-width: 900px) {
+  .sticky-top { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "bar actions" "tools tools" "status status" "track track"; }
+  .status {
+    flex-wrap: wrap; gap: 0 10px; min-height: 26px; padding: 3px 12px; font-size: .78rem;
+    color: var(--text2); background: var(--surface); border-top: 1px solid var(--border);
+  }
+  .status-gap { display: none; }
+  #clock { margin-left: auto; }
+  #eta { opacity: 1; }
+}
+@media (max-width: 600px) {
+  .bar { min-height: 46px; padding: 1px 4px; }
+  .actions { padding: 1px 4px 1px 0; }
+  .controls { padding: 6px 8px; gap: 6px; }
+  #law-select, #ch-select { flex: 1 1 42%; height: 44px; font-size: 16px; }
+  .search-box { flex: 1 1 42%; }
+  #search-input { height: 44px; padding-right: 12px; font-size: 16px; }
+  .controls.searching #search-input { padding-right: 76px; }
+  #stats { display: none; }
+  .controls.searching #stats { display: inline; }
+  #show-answers-btn { width: 44px; height: 44px; padding: 0; }
+  #show-answers-btn span { display: none; }
+  .status { padding: 3px 10px; font-size: .76rem; }
+  .status .progress-pct { display: none; }
+  .status-gap { display: block; flex: 0 0 100%; width: auto; height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .icon-btn, #theme-btn, .bank-menu summary, .bank-menu summary svg, #tools-toggle svg { transition: none; }
+}
+:root { --bar: #2e7d32; }
+[data-theme="dark"] { --bar: #1b5e20; }
 </style>
 </head>
 <body>
 
 <div class="sticky-top">
-  <nav class="site-nav">
-    <a href="/osh-quiz/">首頁</a>
-    <span class="sep">|</span>
-    <a href="/osh-quiz/112/">112版</a>
-    <span class="sep">|</span>
-    <span class="cur">113版</span>
-    <span class="sep">|</span>
-    <a href="/osh-quiz/kyso/">缺氧作業主管</a>
-    <span class="sep">|</span>
-    <a href="/osh-quiz/roof/">屋頂作業主管</a>
-  </nav>
-  <header>
-    <h1>營造業丙種職業安全衛生<br>業務主管題庫<small>【113年版 (甲、乙、丙種)精選(471 題)】</small></h1>
-    <span id="eta"></span>
-    <span id="clock" aria-live="off"></span>
-    <button id="theme-btn" title="切換深色模式" aria-label="切換深色模式"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-  </header>
-
-  <div class="progress-section">
-    <div class="progress-meta">
-      <span class="progress-label" id="progress-label">已作答 0 / 471 題</span>
-      <span class="accuracy-label" id="accuracy-label"></span>
-      <span class="progress-pct" id="progress-pct">0%</span>
-    </div>
-    <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="471" aria-valuenow="0" id="progress-track">
-      <div class="progress-fill" id="progress-fill"></div>
-    </div>
+  <div class="bar">
+    <a class="icon-btn" href="/osh-quiz/" aria-label="回首頁" title="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-6h4v6"/></svg></a>
+    <details class="menu bank-menu">
+      <summary aria-label="切換題庫" title="營造業丙種職業安全衛生業務主管題庫 113 年版精選"><h1>丙種業務主管 113 版</h1><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="panel">
+        <a href="/osh-quiz/112/">112 版</a>
+        <a href="/osh-quiz/113/" aria-current="page">113 版</a>
+        <a href="/osh-quiz/kyso/">缺氧作業主管</a>
+        <a href="/osh-quiz/roof/">屋頂作業主管</a>
+      </div>
+    </details>
   </div>
 
-  <div class="controls">
+  <div class="actions">
+    <button id="theme-btn" class="icon-btn" type="button" title="切換深色模式" aria-label="切換深色模式"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <details class="menu more-menu">
+      <summary class="icon-btn" aria-label="更多功能" title="更多功能"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></summary>
+      <div class="panel panel-right">
+        <button id="export-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>匯出作答紀錄</button>
+        <button id="import-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M4 21h16"/></svg>匯入作答紀錄</button>
+        <button id="clear-wrong-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>清除錯題本</button>
+        <button id="reset-progress-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>重置進度</button>
+      </div>
+    </details>
+  </div>
+
+  <div class="status">
+    <span class="progress-label" id="progress-label">已作答 0 / 471 題</span>
+    <span class="progress-pct" id="progress-pct">0%</span>
+    <span class="accuracy-label" id="accuracy-label"></span>
+    <span class="status-gap"></span>
+    <span id="eta"></span>
+    <span id="clock" aria-live="off" title="點一下切換全螢幕"></span>
+  </div>
+
+  <div class="controls" id="tools-row">
     <select id="ch-select" aria-label="依章節篩選">
 <option value="全部">全部（471 題）</option>
 <option value="未完成" id="opt-incomplete">📝 未完成</option>
@@ -478,15 +605,19 @@ main {
 <option value="第十七章 職業災害調查處理與統計">第十七章 職業災害調查處理與統計（39 題）</option>
 </optgroup>
     </select>
-    <input id="search-input" type="search" placeholder="🔍 關鍵字搜尋…" autocomplete="off" aria-label="搜尋題目">
-    <span id="stats"></span>
-    <button id="clear-wrong-btn" title="清除錯題記錄">清除錯題本</button>
-    <button id="reset-progress-btn" title="重置所有作答記錄">重置進度</button>
-    <button id="export-btn" title="匯出作答紀錄（JSON）">⬇ 匯出</button>
-    <button id="import-btn" title="匯入作答紀錄（JSON）">⬆ 匯入</button>
+    <div class="search-box">
+      <input id="search-input" type="search" placeholder="搜尋題目" autocomplete="off" aria-label="搜尋題目">
+      <span id="stats"></span>
+    </div>
+    <button id="show-answers-btn" type="button" title="顯示所有正確答案（不計入統計）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span>顯示答案</span></button>
     <input id="import-file" type="file" accept=".json" style="display:none">
-    <button id="show-answers-btn" title="顯示所有正確答案（不計入統計）">👁 顯示答案</button>
   </div>
+
+  <div class="progress-track" role="progressbar" aria-label="作答進度" aria-valuemin="0" aria-valuemax="471" aria-valuenow="0" id="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+
+  <button id="tools-toggle" type="button" aria-controls="tools-row" aria-expanded="true" aria-label="收合工具列" title="收合工具列"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
 </div>
 
 <main id="main-grid">
@@ -961,7 +1092,8 @@ document.getElementById('import-file').addEventListener('change', e => {
   btn.addEventListener('click', () => {
     const on = document.body.classList.toggle('show-answers');
     btn.classList.toggle('active', on);
-    btn.textContent = on ? '🙈 隱藏答案' : '👁 顯示答案';
+    btn.querySelector('span').textContent = on ? '隱藏答案' : '顯示答案';
+    btn.setAttribute('aria-pressed', on);
   });
 })();
 
@@ -1039,7 +1171,44 @@ updateProgress();
 updateWrongLabel();
 render();
 </script>
-<div class="site-ver">v261106.05</div>
-<script>document.querySelector('.site-nav .cur')?.scrollIntoView({ inline: 'center', block: 'nearest' });</script>
+<div class="site-ver">v261106.06</div>
+<script>
+// One menu open at a time; close on outside press, Escape, or choosing an item.
+(function () {
+  const menus = [...document.querySelectorAll('details.menu')];
+  const closeAll = except => menus.forEach(m => { if (m !== except) m.open = false; });
+  menus.forEach(m => m.addEventListener('toggle', () => { if (m.open) closeAll(m); }));
+  document.addEventListener('pointerdown', e => { if (!e.target.closest('details.menu')) closeAll(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+  document.querySelectorAll('.panel button').forEach(b => b.addEventListener('click', () => closeAll()));
+  const search = document.getElementById('search-input');
+  const controls = document.querySelector('.controls');
+  const sync = () => controls.classList.toggle('searching', search.value.trim() !== '');
+  search.addEventListener('input', sync);
+  sync();
+
+  // Filter/search row collapse, shared by every bank. A dot marks a filter still active while hidden.
+  const KEY = 'osh_tools_collapsed';
+  const top = document.querySelector('.sticky-top');
+  const toggle = document.getElementById('tools-toggle');
+  const select = document.querySelector('.controls select');
+  const markActive = () => top.classList.toggle('tools-active', select.selectedIndex > 0 || search.value.trim() !== '');
+  function setCollapsed(on) {
+    top.classList.toggle('tools-collapsed', on);
+    toggle.setAttribute('aria-expanded', String(!on));
+    const label = on ? '展開工具列' : '收合工具列';
+    toggle.setAttribute('aria-label', label);
+    toggle.title = label;
+    try { localStorage.setItem(KEY, on ? '1' : '0'); } catch (e) {}
+    markActive();
+  }
+  let saved = false;
+  try { saved = localStorage.getItem(KEY) === '1'; } catch (e) {}
+  setCollapsed(saved);
+  toggle.addEventListener('click', () => setCollapsed(!top.classList.contains('tools-collapsed')));
+  select.addEventListener('change', markActive);
+  search.addEventListener('input', markActive);
+})();
+</script>
 </body>
 </html>
