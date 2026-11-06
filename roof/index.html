@@ -462,6 +462,16 @@ main {
 #theme-btn { display: inline-flex; align-items: center; justify-content: center; }
 #theme-btn svg { display: block; width: 20px; height: 20px; }
 .site-ver { position: fixed; right: 6px; bottom: 4px; z-index: 50; padding: 0 4px; font-size: .64rem; line-height: 1.5; color: var(--text2); background: var(--bg); border-radius: 3px; opacity: .75; pointer-events: none; font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) {
+  header { flex-wrap: wrap; row-gap: 6px; }
+  header h1 { flex: 1 1 calc(100% - 56px); min-width: 0; order: 0; }
+  #theme-btn { order: 1; margin-left: auto; }
+  #eta { order: 2; margin-right: auto; padding: 3px 8px; font-size: .9rem; }
+  #clock { order: 3; padding: 3px 8px; font-size: .9rem; }
+  .site-nav { overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+  .site-nav::-webkit-scrollbar { display: none; }
+  .site-nav a, .site-nav .cur, .site-nav .sep { flex: none; }
+}
 </style>
 </head>
 <body>
@@ -1125,6 +1135,7 @@ updateProgress();
 updateWrongLabel();
 render();
 </script>
-<div class="site-ver">v261106.04</div>
+<div class="site-ver">v261106.05</div>
+<script>document.querySelector('.site-nav .cur')?.scrollIntoView({ inline: 'center', block: 'nearest' });</script>
 </body>
 </html>
