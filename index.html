@@ -364,6 +364,8 @@ main {
     <a href="/osh-quiz/113/">113版</a>
     <span class="sep">|</span>
     <a href="/osh-quiz/kyso/">缺氧作業主管</a>
+    <span class="sep">|</span>
+    <a href="/osh-quiz/roof/">屋頂作業主管</a>
   </nav>
   <header>
     <h1>營造業丙種職業安全衛生<br>業務主管題庫 <small>112.05.16 版</small></h1>
@@ -651,10 +653,11 @@ document.getElementById('main-grid').addEventListener('click', e => {
 
     answered.set(id, { chosen, correct: q.answer });
     saveAnswered();
-    updateProgress();
+    
 
     if (chosen !== q.answer) markWrong(id);
     else unmarkWrong(id);
+    updateProgress();
 
     const card = document.getElementById('card-' + id);
     const tmp = document.createElement('div');
