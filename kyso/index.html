@@ -468,6 +468,8 @@ main {
     <a href="/osh-quiz/113/">113版</a>
     <span class="sep">|</span>
     <span class="cur">缺氧作業主管</span>
+    <span class="sep">|</span>
+    <a href="/osh-quiz/roof/">屋頂作業主管</a>
   </nav>
   <header>
     <h1>缺氧作業主管安全衛生教育訓練<br>題庫練習<small>【綜合題庫（1692 題）】</small></h1>
@@ -879,10 +881,11 @@ document.getElementById('main-grid').addEventListener('click', e => {
 
     answered.set(id, {chosen});
     saveAnswered();
-    updateProgress();
+    
 
     if (chosen === q.answer) unmarkWrong(id);
     else markWrong(id);
+    updateProgress();
 
     const card = document.getElementById('card-' + id);
     const tmp = document.createElement('div');
@@ -914,10 +917,11 @@ document.getElementById('main-grid').addEventListener('click', e => {
 
     answered.set(id, {chosen});
     saveAnswered();
-    updateProgress();
+    
 
     if (arraysEqual(chosen, q.answer)) unmarkWrong(id);
     else markWrong(id);
+    updateProgress();
 
     const tmp = document.createElement('div');
     tmp.innerHTML = renderCard(q);
