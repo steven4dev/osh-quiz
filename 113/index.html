@@ -415,6 +415,8 @@ main {
     <span class="cur">113版</span>
     <span class="sep">|</span>
     <a href="/osh-quiz/kyso/">缺氧作業主管</a>
+    <span class="sep">|</span>
+    <a href="/osh-quiz/roof/">屋頂作業主管</a>
   </nav>
   <header>
     <h1>營造業丙種職業安全衛生<br>業務主管題庫<small>【113年版 (甲、乙、丙種)精選(471 題)】</small></h1>
@@ -780,10 +782,11 @@ document.getElementById('main-grid').addEventListener('click', e => {
 
     answered.set(id, { chosen });
     saveAnswered();
-    updateProgress();
+    
 
     if (chosen === q.answer) unmarkWrong(id);
     else markWrong(id);
+    updateProgress();
 
     const card = document.getElementById('card-' + id);
     const tmp = document.createElement('div');
@@ -814,10 +817,11 @@ document.getElementById('main-grid').addEventListener('click', e => {
 
     answered.set(id, { chosen });
     saveAnswered();
-    updateProgress();
+    
 
     if (arraysEqual(chosen, q.answer)) unmarkWrong(id);
     else markWrong(id);
+    updateProgress();
 
     const tmp = document.createElement('div');
     tmp.innerHTML = renderCard(q);
