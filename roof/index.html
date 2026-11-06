@@ -26,17 +26,17 @@ body {
   --border: #dde1e7;
   --text: #1a1a2e;
   --text2: #5a6272;
-  --primary: #6a1b9a;
-  --primary-dark: #4a148c;
+  --primary: #bf5a0b;
+  --primary-dark: #8f4208;
   --correct: #0f7a42;
   --correct-bg: #d4edda;
   --wrong: #c0392b;
   --wrong-bg: #fde8e6;
   --wrong-border: #e74c3c;
-  --tag-bg: #f3e5f5;
-  --tag-color: #6a1b9a;
+  --tag-bg: #fdebd9;
+  --tag-color: #a34c08;
   --progress-track: #e0e5ec;
-  --progress-fill: #6a1b9a;
+  --progress-fill: #bf5a0b;
   --progress-done: #0f7a42;
   --shadow: 0 2px 8px rgba(0,0,0,.08);
   --radius: 12px;
@@ -48,17 +48,17 @@ body {
   --border: #2e3347;
   --text: #e8eaf0;
   --text2: #8a91a8;
-  --primary: #ce93d8;
-  --primary-dark: #ba68c8;
+  --primary: #f0a35e;
+  --primary-dark: #8f4208;
   --correct: #2ecc71;
   --correct-bg: #0d3320;
   --wrong: #e74c3c;
   --wrong-bg: #3d1212;
   --wrong-border: #e74c3c;
-  --tag-bg: #2d1b3e;
-  --tag-color: #ce93d8;
+  --tag-bg: #3a2510;
+  --tag-color: #f0a35e;
   --progress-track: #22263a;
-  --progress-fill: #ce93d8;
+  --progress-fill: #f0a35e;
   --progress-done: #2ecc71;
   --shadow: 0 2px 8px rgba(0,0,0,.35);
 }
@@ -457,13 +457,17 @@ main {
   #search-input { flex: 1 1 140px; }
   .progress-section { padding: 6px 12px 8px; }
 }
+[data-theme="dark"] header { background: #8f4208; }
+[data-theme="dark"] .ch-tag.numeric { background: #3a2510; color: #ffb74d; }
 </style>
 </head>
 <body>
 
 <div class="sticky-top">
   <nav class="site-nav">
-    <a href="/osh-quiz/">112版</a>
+    <a href="/osh-quiz/">首頁</a>
+    <span class="sep">|</span>
+    <a href="/osh-quiz/112/">112版</a>
     <span class="sep">|</span>
     <a href="/osh-quiz/113/">113版</a>
     <span class="sep">|</span>
