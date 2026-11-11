@@ -487,6 +487,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visib
 }
 :root { --bar: #1e6fbf; }
 [data-theme="dark"] { --bar: #155299; }
+
+/* Card tag: full text, wraps inside its column, always right-aligned */
+.card-header { flex-wrap: wrap; }
+.card-header .ch-tag, .card-header .law-tag {
+  flex: 0 1 auto; margin-left: auto; max-width: 62%;
+  white-space: normal; overflow: visible; text-overflow: clip;
+  overflow-wrap: anywhere; text-align: right; border-radius: 10px;
+}
+[data-theme="dark"] .law-tag.numeric { background: var(--tag-bg); color: #ffb74d; }
 </style>
 </head>
 <body>
@@ -659,9 +668,8 @@ let currentSearch = '';
 
 // ── Law tag ───────────────────────────────────────────────────────────────────
 function lawTag(law, isNumeric) {
-  const short = law.length > 8 ? law.slice(0, 8) + '…' : law;
   const cls = isNumeric ? 'law-tag numeric' : 'law-tag';
-  return `<span class="${cls}">${short}</span>`;
+  return `<span class="${cls}">${law}</span>`;
 }
 
 // ── Render one card ───────────────────────────────────────────────────────────
@@ -1007,7 +1015,7 @@ updateProgress();
 updateWrongLabel();
 render();
 </script>
-<div class="site-ver">v261106.06</div>
+<div class="site-ver">v261111.01</div>
 <script>
 // One menu open at a time; close on outside press, Escape, or choosing an item.
 (function () {
