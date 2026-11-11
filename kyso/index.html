@@ -591,6 +591,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visib
 }
 :root { --bar: #6a1b9a; }
 [data-theme="dark"] { --bar: #4a148c; }
+
+/* Card tag: full text, wraps inside its column, always right-aligned */
+.card-header { flex-wrap: wrap; }
+.card-header .ch-tag, .card-header .law-tag {
+  flex: 0 1 auto; margin-left: auto; max-width: 62%;
+  white-space: normal; overflow: visible; text-overflow: clip;
+  overflow-wrap: anywhere; text-align: right; border-radius: 10px;
+}
+[data-theme="dark"] .law-tag.numeric { background: var(--tag-bg); color: #ffb74d; }
 </style>
 </head>
 <body>
@@ -759,13 +768,12 @@ let currentSearch = '';
 
 // ── Source tag display ────────────────────────────────────────────────────────
 function srcTag(q) {
-  const src = q.source || '';
+  const src = q.chapter || q.source || '';
   let cls = 'ch-tag';
   let badge = '';
-  if (q.type === 'truefalse') { cls += ' tf'; badge = ' ✅'; }
-  else if (q.isNumeric) { cls += ' numeric'; badge = ' 🔢'; }
-  const short = src.length > 10 ? src.slice(0, 10) + '…' : src;
-  return `<span class="${cls}">${short}${badge}</span>`;
+  if (q.type === 'truefalse') { cls += ' tf'; badge = '✅ '; }
+  else if (q.isNumeric) { cls += ' numeric'; badge = '🔢 '; }
+  return `<span class="${cls}">${badge}${src}</span>`;
 }
 
 // ── Multiple-select helpers ───────────────────────────────────────────────────
@@ -1269,7 +1277,7 @@ updateProgress();
 updateWrongLabel();
 render();
 </script>
-<div class="site-ver">v261106.06</div>
+<div class="site-ver">v261111.01</div>
 <script>
 // One menu open at a time; close on outside press, Escape, or choosing an item.
 (function () {
